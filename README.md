@@ -1,2 +1,2 @@
-# cours_ada
-Partage de mes essais avec Ada
+# Essais Ada
+Partage de mes essais en Ada, soit l'algorithme de Kaprekar et des algorithmes tri.
