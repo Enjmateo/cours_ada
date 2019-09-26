@@ -3,14 +3,16 @@ M P W=b
 P ZX
 
 RN
+RV NO_ACCESS_SUBPROGRAMS
 RV NO_CALENDAR
 RV NO_DELAY
 RV NO_IO
 RV NO_RECURSION
+RV NO_DEFAULT_INITIALIZATION
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV SPARK_05
 
-U test_tri%b		test_tri.adb		a6cb7702 NE OO SU
+U test_tri%b		test_tri.adb		92c80b65 NE OO SU
 W ada%s			ada.ads			ada.ali
 W ada.calendar%s	a-calend.adb		a-calend.ali
 W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
@@ -46,34 +48,35 @@ D s-stoele.ads		20180525052302 2dc34a04 system.storage_elements%s
 D s-traent.ads		20180525052300 005bf670 system.traceback_entries%s
 D s-unstyp.ads		20180525052301 34867c83 system.unsigned_types%s
 D s-wchcon.ads		20180525052301 1b7d22d2 system.wch_con%s
-D test_tri.adb		20190925130903 efb55834 test_tri%b
+D test_tri.adb		20190926170911 dbb62453 test_tri%b
 X 1 ada.ads
-16K9*Ada 20e8 28|1r6 1r19 2r6 4r5 60r4
+16K9*Ada 20e8 28|1r6 1r19 2r6 4r5
 X 2 a-calend.ads
 36K13*Calendar 398e17 28|2w10
 X 4 a-inteio.ads
-18K13*Integer_Text_IO[9|46] 28|1w23 60r8
+18K13*Integer_Text_IO[9|46] 28|1w23
 X 8 a-textio.ads
 49K13*Text_IO 471e16 28|1w10 4r9
-242U14*Put 28|35s10 39s10
-263U14*Put_Line 28|37s7 41s7 61s4
-X 9 a-tiinio.ads
-56U14*Get 28|60s24[4|18]
+242U14*Put 28|36s10 40s10
+263U14*Put_Line 28|38s7 42s7
 X 28 test_tri.adb
-6U11*Test_Tri 6b11 62l5 62t13
-9A9 nbr(integer)<integer> 12r32 28r19 29r19
-12U14 tri 12b14 12=19 24l8 24t11 31s7 32s7
-12a19 Tab{9A9} 15r16 16r19 16r31 17r16 17r30 18r21 19m16 19r30 20m16
-13i7 K{integer} 18m16 20r26
-15i11 J{integer}
-16i14 I{integer} 17r20 17r34 18r25 19r20 19r34 20r20
-27U14 Test_Tri 27b14 42l8 42t16
-28a7 test_tri1{9A9} 32m11 32r11 34r16 34r33 35r28
-29a7 test_tri2{9A9} 31m11 31r11 38r16 38r33 39r28
-34i11 i{integer} 35r38
-38i11 i{integer} 39r38
-45V13 Factorielle{integer} 45b13 45>25 51s25 54l8 54t19 61s27
-45i25 N{integer} 48r10 51r22 51r37
-46i7 Resultat{integer} 49m10 51m10 53r14
-57i4 N{integer} 60m28 61r39
+6U11*Test_Tri 6b11 64l5 64t13
+9A9 nbr(integer)<integer> 10r55 13r38 29r19 30r19
+10P9 P_procedure 10=42 28r28 57r8
+10a42 Tab{9A9}
+13U14 Tri_Bulle 13b14 13=25 25l8 25t17 59r9
+13a25 Tab{9A9} 16r16 17r19 17r31 18r16 18r30 19r21 20m16 20r30 21m16
+14i7 K{integer} 19m16 21r26
+16i11 J{integer}
+17i14 I{integer} 18r20 18r34 19r25 20r20 20r34 21r20
+28U14 Test_Tri 28b14 28>24 43l8 43t16 60s4
+28p24 F{10P9} 32r7 33r7
+29a7 test_tri1{9A9} 33m9 33r9 35r16 35r33 36r28
+30a7 test_tri2{9A9} 32m9 32r9 39r16 39r33 40r28
+35i11 i{integer} 36r38
+39i11 i{integer} 40r38
+46V13 Factorielle{integer} 46b13 46>25 52s25 55l8 55t19
+46i25 N{integer} 49r10 52r22 52r37
+47i7 Resultat{integer} 50m10 52m10 54r14
+57p4 F{10P9} 59m4 60r13
 
