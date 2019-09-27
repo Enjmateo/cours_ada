@@ -4,24 +4,28 @@ with ada.Calendar;
 use ada.Text_IO;
 
 procedure Main is
+   
    -- Type & package
    subtype chiffre is Natural range 0..9;
    type nbr is array (Integer range <>) of Integer;
    package date renames ada.Calendar;
-
+   
+   
    -- Variables globales
    FND : constant Integer := 100; -- FIND
    WST : constant Integer := FND - 1;  -- WRITE START
-
+   
+   
    data_dect : nbr(1..FND);
    -- Ce tableau contient des nombres pour de la detection de boucle
-   -- Le rang 99 et 100 sont des rangs de services (WST et FND)
+   -- Le rang WST et FND sont des rangs de services
+   
    
    -- Procédure de detection de boucle, utilise la base de données data_dect
    procedure detect_loop (int : in Integer) is
       debut_ecriture : Integer := data_dect(WST);
    begin
-      for i in data_dect'First..98 loop
+      for i in data_dect'First..(WST - 1) loop
          if int = data_dect(i) then
             data_dect(FND) := 1;
          end if;
@@ -30,12 +34,13 @@ procedure Main is
       data_dect(debut_ecriture) := int;
       data_dect(WST) := data_dect(WST) + 1;
 
-      if data_dect(WST) >= 99 then
+      if data_dect(WST) >= WST then
          raise Storage_Error;
       end if;
 
    end detect_loop;
-
+   
+   
    -- Tri par ordre croissant un tableau d'integer
    procedure tri (tab : in out nbr) is
       buffer : nbr(tab'Range);
@@ -56,6 +61,7 @@ procedure Main is
       end loop;
       tab := buffer;
    end tri;
+   
    
    -- Tri par ordre décroissant
    procedure tri_inverse (tab : in out nbr) is
@@ -86,7 +92,6 @@ procedure Main is
       ord_droiss := ord_croiss;
       tri(ord_croiss);
       tri_inverse(ord_droiss);
-
 
       for j in 1..dimension loop
          nombre_droiss := nombre_droiss + ord_droiss(j) * (10**(dimension - (j)));
@@ -170,8 +175,7 @@ procedure Main is
       end loop;
       Put_Line("");
    end test_tri;
-
-
+   
 
    nombre: Integer := 0;
 begin
