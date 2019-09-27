@@ -5,12 +5,14 @@ P SS ZX
 RN
 RV NO_CALENDAR
 RV NO_DELAY
+RV NO_DIRECT_BOOLEAN_OPERATORS
+RV NO_EXCEPTIONS
 RV NO_IO
 RV NO_SECONDARY_STACK
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV SPARK_05
 
-U chaine%b		chaine.adb		48bb5f25 NE OO SU
+U chaine%b		chaine.adb		5b8388a5 NE OO SU
 W ada%s			ada.ads			ada.ali
 W ada.calendar%s	a-calend.adb		a-calend.ali
 W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
@@ -29,7 +31,7 @@ D a-tags.ads		20151016130316 01f5e3ef ada.tags%s
 D a-textio.ads		20140717063745 386df5d4 ada.text_io%s
 D a-tiinio.ads		20140717063513 aa04e5d6 ada.text_io.integer_io%s
 D a-unccon.ads		20170106103348 31484697 ada.unchecked_conversion%s
-D chaine.adb		20190927091049 abc22281 chaine%b
+D chaine.adb		20190927095122 b8faf501 chaine%b
 D interfac.ads		20160502101001 5ab55268 interfaces%s
 D i-cstrea.ads		20140801100435 e53d8b8e interfaces.c_streams%s
 D system.ads		20170510173650 4635ec04 system%s
@@ -55,23 +57,27 @@ X 4 a-inteio.ads
 18K13*Integer_Text_IO[9|46] 11|1w23
 X 8 a-textio.ads
 49K13*Text_IO 471e16 11|1w10 4r9
-166U14*New_Line 11|53s13
-208U14*Put 11|51s16
-242U14*Put 11|48s13
+166U14*New_Line 11|75s13
+208U14*Put 11|73s16
+242U14*Put 11|69s13
 249U14*Get_Line 11|16s7
 X 11 chaine.adb
-6U11*Chaine 6b11 63l5 63t11
-8i4 LMT{integer} 9r29 13r27
+6U11*Chaine 6b11 91l5 91t11
+8i4 LMT{integer} 9r29 13r27 42r28
 9A9 Buffer(character)<integer>
-12V13 Lire_Entree{string} 12b13 25l8 25t19 62s12
+12V13 Lire_Entree{string} 12b13 25l8 25t19 90s12
 13a7 Saisie{string} 16m16 18r26 22r55 22r63
 14i7 Last{natural} 16m24 18r41 22r78
 18a10 Phrase{string} 20m10 20r17 21m10 21r17 22m10 22r18 22r36 23r17
-29U14 Fnd_Mot 29b14 29>23 58l8 58t15 62s4
-29a23 Text{string} 34r16 35r13 41r19 51r20
-30i7 J{integer} 38m13 41r26 45m19 45r24 50r28
-31b7 Find{boolean} 39m13 40r23 42m19
-32i7 Compteur{integer} 43m19 43r31 48r43
-34i11 I{integer} 35r18 41r24 50r22 50r26
-50i17 K{integer} 51r25
+29U14 Fnd_Mot 29b14 29>23 86l8 86t15 90s4
+29a23 Text{string} 38r18 40r13 53r19 60r19 73r20 80r20
+30i7 I{integer} 38r13 40r18 53r24 60r24 70m13 70r18 72r22 72r26 78m10 78r15
+. 80r13
+31i7 J{integer} 48m13 53r26 54m16 54r21 60r26 65m19 65r24 71m13 71r18 72r28
+32b7 Find{boolean} 49m13 59r23 61m19
+33b7 Word{boolean} 64m19
+34b7 Fini{boolean} 38r36 81m16
+35i7 Compteur{integer} 42r16 62m19 62r31 69r43
+36i7 Nb_Blanc{integer} 50m13 55m16 55r28 70r22 71r22
+72i17 K{integer} 73r25
 

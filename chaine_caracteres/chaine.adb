@@ -7,6 +7,11 @@ procedure Chaine is
    -- Sous-types & variables globales
    LMT : constant Integer := 100; -- Taille maximun du traitement
    Type Buffer is array (1..LMT) of Character;
+   type Position is record 
+      Debut : Integer;
+      Fin : Integer;
+   end record;
+   
    
    -- Lecture d'entrée console
    function Lire_Entree return String is
@@ -25,36 +30,53 @@ procedure Chaine is
    end Lire_Entree;
    
    
-   -- Procedure de recherche de mot
-   procedure Fnd_Mot (Text : in String) is
-      J : Integer := 0;
-      Find : Boolean := False;
-      Compteur : Integer := 0;
+   -- Extrait le premier mot d'un string
+   function Extraire_Mot(Text : in out String, Trouve : out Boolean) return Position is
+      I : Integer := 1;
+      Pos : Position;
+      Fin : Boolean := False;
    begin
-      for I in Text'Range loop
-	 if Text(I) = ' ' then
-	    
-	    -- Localisation du ' ' suivant
-	    J := 1;
-	    Find := False;
-	    while not Find loop
-	       if Text(I+J) = ' ' then
-		  Find := True;
-		  Compteur := Compteur + 1;
-	       else 
-		  J := J+1;
-	       end if;
-	    end loop;
-	    Put("Mot n°" & Integer'Image(Compteur) & " trouvé : ");
-	    
-	    for K in I..(I+J) loop
-	       Put(Text(K));
-	    end loop;
-	    New_Line;
+      Trouve := True;
+      
+      while Text(I) = ' ' loop
+	 I := I + 1;
+	 if I >= Text'Last then 
+	    Trouve := False;
+	    Fin := True;
 	 end if;
-	 
       end loop;
       
+      Pos.Debut := I;
+      
+      while not Fin loop
+	 if Text(I) = ' ' then
+	    Fin := True;
+	 else
+	    I := I + 1;
+	 end if;
+      end loop;
+      
+      Pos.Fin := I;
+      
+      for J in Text'First..I loop
+	 Text(J) := ' ';
+      end loop;
+
+      return Pos;
+   End Extraire_Mot;
+   
+   
+   -- Procedure de recherche de mot
+   procedure Fnd_Mot (Text : in String) is
+      Fini : Boolean := False;
+      Compteur : Integer := 0;
+      Pos : Position;
+      Trouve : Boolean;
+   begin
+      while not Fini loop
+	 Pos := Extraire_Mot(Text, Trouve);
+	 -- if not fini etc. mettre le reste du prgm dans else
+      end loop;
    end Fnd_Mot;
    
    
