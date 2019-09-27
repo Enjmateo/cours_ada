@@ -16,7 +16,8 @@ procedure Main is
    data_dect : nbr(1..FND);
    -- Ce tableau contient des nombres pour de la detection de boucle
    -- Le rang 99 et 100 sont des rangs de services (WST et FND)
-
+   
+   -- Procédure de detection de boucle, utilise la base de données data_dect
    procedure detect_loop (int : in Integer) is
       debut_ecriture : Integer := data_dect(WST);
    begin
@@ -35,7 +36,7 @@ procedure Main is
 
    end detect_loop;
 
-
+   -- Tri par ordre croissant un tableau d'integer
    procedure tri (tab : in out nbr) is
       buffer : nbr(tab'Range);
       valeur : Integer := 0;
@@ -55,7 +56,8 @@ procedure Main is
       end loop;
       tab := buffer;
    end tri;
-
+   
+   -- Tri par ordre décroissant
    procedure tri_inverse (tab : in out nbr) is
       buffer : nbr(tab'Range);
    begin
@@ -66,7 +68,7 @@ procedure Main is
       tab:=buffer;
    end tri_inverse;
 
-
+   -- Partie opérative de l'algo de Kaprekar (nombre en deux tableaux triés, affiche et retourne la différence des nombres
    function operation (nombre : integer; dimension : Integer) return Integer is
       ord_croiss : nbr(1..dimension);
       ord_droiss : nbr(1..dimension);
@@ -96,7 +98,9 @@ procedure Main is
 
       return nombre_croiss - nombre_droiss;
    end operation;
-
+   
+   
+   -- Permet de déterminer la taille d'un nombre
    function nb_digits (nombre : Integer) return Integer is
       dimension_nok : Boolean := true;
       dimension : Integer := 0;
@@ -117,7 +121,9 @@ procedure Main is
 
       return dimension;
    end nb_digits;
-
+   
+   
+   -- Procédure de coordination des fonctions de l'algorithme et de la detection de boucle 
    procedure kaprekar (nombre : in out Integer) is
       dimension_nok : Boolean := true;
       dimension : Integer := 0;
@@ -144,7 +150,10 @@ procedure Main is
 
 
    end kaprekar;
-
+   
+   
+   -- Procédure de test de la fonction tri
+   -- cf ../../Test_tri pour d'autres algorithmes de tri
    procedure test_tri is
       test_tri1 : nbr(1..10) := (5,4,8,3,9,1,6,7,2,0);
       test_tri2 : nbr(1..10) := (5,4,8,6,9,1,6,7,7,0);
@@ -172,14 +181,18 @@ begin
 
    --Put_Line("Test du programme :");
    --test_tri;
-
+   
+   
+   --
    Put("Algorithme de Kaprekar. Saisir un nombre : ");
    Ada.Integer_Text_IO.Get(nombre);
 
    kaprekar(nombre);
 
    Put_Line("ALGORITHME FINI");
-
+   
+   
+   -- Exceptions
 exception
    when Constraint_Error => Put_Line("Nombre donné non valide.");
    when Storage_Error => Put_Line("DATA_BASE_TOO_SHORT, data_dect(WST):"&Integer'Image(data_dect(WST)));
