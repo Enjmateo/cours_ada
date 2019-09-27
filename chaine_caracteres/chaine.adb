@@ -31,14 +31,14 @@ procedure Chaine is
    
    
    -- Extrait le premier mot d'un string
-   function Extraire_Mot(Text : in out String, Trouve : out Boolean) return Position is
+   function Extraire_Mot(Text : in out String; Trouve : out Boolean) return Position is
       I : Integer := 1;
       Pos : Position;
       Fin : Boolean := False;
    begin
       Trouve := True;
       
-      while Text(I) = ' ' loop
+      while Text(I) = ' ' and not Fin loop
 	 I := I + 1;
 	 if I >= Text'Last then 
 	    Trouve := False;
@@ -67,15 +67,28 @@ procedure Chaine is
    
    
    -- Procedure de recherche de mot
-   procedure Fnd_Mot (Text : in String) is
+   procedure Fnd_Mot (Txt :  String) is
       Fini : Boolean := False;
       Compteur : Integer := 0;
       Pos : Position;
       Trouve : Boolean;
+      Text : String(Txt'Range) := Txt; -- question de compatibilité
    begin
       while not Fini loop
 	 Pos := Extraire_Mot(Text, Trouve);
-	 -- if not fini etc. mettre le reste du prgm dans else
+	 
+	 if not Trouve then
+	    Fini := True;
+	    Put_Line("Extraction terminée");
+	 else 
+	    Compteur := Compteur + 1;
+	    Put("Mot n°" & Integer'Image(Compteur) & " trouvé : ");
+	    for I in Pos.Debut..Pos.Fin loop
+	       Put(Txt(I));
+	       Text(I) := ' ';
+	    end loop;
+	    New_Line;
+	 end if;
       end loop;
    end Fnd_Mot;
    
