@@ -1,0 +1,66 @@
+V "GNAT Lib v2018"
+M P W=b
+P ZX
+
+RN
+RV NO_IO
+RV NO_RECURSION
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV SPARK_05
+
+U recursivite%b		recursivite.adb		00b23d3b NE OO SU
+W ada%s			ada.ads			ada.ali
+Z ada.tags%s		a-tags.adb		a-tags.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+Z system.concat_2%s	s-conca2.adb		s-conca2.ali
+Z system.img_int%s	s-imgint.adb		s-imgint.ali
+
+D ada.ads		20180525052300 76789da1 ada%s
+D a-except.ads		20180525052301 291912d5 ada.exceptions%s
+D a-ioexce.ads		20180525052259 e4a01f64 ada.io_exceptions%s
+D a-stream.ads		20180525052300 119b8fb3 ada.streams%s
+D a-tags.ads		20180525052302 491b781d ada.tags%s
+D a-textio.ads		20180525052302 881db35a ada.text_io%s
+D a-unccon.ads		20180525052301 0e9b276f ada.unchecked_conversion%s
+D interfac.ads		20180525052300 5ab55268 interfaces%s
+D i-cstrea.ads		20180525052259 e53d8b8e interfaces.c_streams%s
+D recursivite.adb	20190929090227 88af8e61 recursivite%b
+D system.ads		20180525052301 4635ec04 system%s
+D s-conca2.ads		20180525052301 02a0d7d0 system.concat_2%s
+D s-crtl.ads		20180525052259 0ebbdb71 system.crtl%s
+D s-exctab.ads		20180525052301 54135002 system.exception_table%s
+D s-ficobl.ads		20180525052302 078245e4 system.file_control_block%s
+D s-imgint.ads		20180525052300 02dbe0c2 system.img_int%s
+D s-parame.ads		20180525052302 48ec542b system.parameters%s
+D s-secsta.ads		20180525052301 20bbe636 system.secondary_stack%s
+D s-soflin.ads		20180525052300 a7318a92 system.soft_links%s
+D s-stache.ads		20180525052302 a37c21ec system.stack_checking%s
+D s-stalib.ads		20180525052301 09bd3940 system.standard_library%s
+D s-stoele.ads		20180525052302 2dc34a04 system.storage_elements%s
+D s-traent.ads		20180525052300 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20180525052301 34867c83 system.unsigned_types%s
+D s-wchcon.ads		20180525052301 1b7d22d2 system.wch_con%s
+X 1 ada.ads
+16K9*Ada 20e8 10|1r6 2r5
+X 6 a-textio.ads
+49K13*Text_IO 471e16 10|1w10 2r9
+166U14*New_Line 10|38s7
+242U14*Put 10|36s10
+263U14*Put_Line 10|34s7 39s7 40s7
+X 10 recursivite.adb
+4U11*Recursivite 4b11 48l5 48t16
+6A9 Vector(integer)<integer> 9r25 16r18 22r18 32r31 43r9 44r9
+9V13 Dichoto{integer} 9b13 9>21 9>33 18s23 24s23 30l8 30t15 40s55
+9a21 V{6A9} 10r27 10r40 10r49 14r18 16r33 16r44 16r54 20r13 22r25 22r45 22r47
+9i33 Value{integer} 14r10 18r35 20r25 24r35
+10i7 Middle{integer} 14r20 16r25 16r46 18m13 20r15 22r34 22r56 24m13 29r14
+11b7 Find{boolean}
+16a13 V2{6A9} 18r31
+22a13 V2{6A9} 24r31
+32U14 Test_Dichoto 32b14 32>27 32>39 41l8 41t20 46s4 47s4
+32a27 V{6A9} 35r16 36r28 40r53 40r63
+32i39 Value{integer} 39r56 40r66
+35i11 I{integer} 36r30
+43a4 V1{6A9} 46r17
+44a4 V2{6A9} 47r17
+

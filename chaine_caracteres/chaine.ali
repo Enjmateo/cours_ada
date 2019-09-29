@@ -30,7 +30,7 @@ D a-tags.ads		20180525052302 491b781d ada.tags%s
 D a-textio.ads		20180525052302 881db35a ada.text_io%s
 D a-tiinio.ads		20180525052300 aa04e5d6 ada.text_io.integer_io%s
 D a-unccon.ads		20180525052301 0e9b276f ada.unchecked_conversion%s
-D chaine.adb		20190927140409 372d20a6 chaine%b
+D chaine.adb		20190927144605 372d20a6 chaine%b
 D interfac.ads		20180525052300 5ab55268 interfaces%s
 D i-cstrea.ads		20180525052259 e53d8b8e interfaces.c_streams%s
 D system.ads		20180525052301 4635ec04 system%s
@@ -56,35 +56,35 @@ X 4 a-inteio.ads
 18K13*Integer_Text_IO[9|46] 11|1w23
 X 8 a-textio.ads
 49K13*Text_IO 471e16 11|1w10 4r9
-166U14*New_Line 11|90s13
-208U14*Put 11|87s16
-242U14*Put 11|85s13
+166U14*New_Line 11|91s13
+208U14*Put 11|88s16
+242U14*Put 11|86s13
 249U14*Get_Line 11|21s7
-263U14*Put_Line 11|82s13
+263U14*Put_Line 11|83s13
 X 11 chaine.adb
-6U11*Chaine 6b11 98l5 98t11
+6U11*Chaine 6b11 99l5 99t11
 8i4 LMT{integer} 9r29 18r27
 9A9 Buffer(character)<integer>
 10R9 Position 13e14 34r77 36r13 73r13
-11i7 Debut{integer} 49m11 86r26
-12i7 Fin{integer} 59m11 86r37
-17V13 Lire_Entree{string} 17b13 30l8 30t19 97s12
+11i7 Debut{integer} 49m11 87r26
+12i7 Fin{integer} 59m11 87r37
+17V13 Lire_Entree{string} 17b13 30l8 30t19 98s12
 18a7 Saisie{string} 21m16 23r26 27r55 27r63
 19i7 Last{natural} 21m24 23r41 27r78
 23a10 Phrase{string} 25m10 25r17 26m10 26r17 27m10 27r18 27r36 28r17
-34V13 Extraire_Mot{10R9} 34b13 34=26 34<48 66l8 66t20 78s17
+34V13 Extraire_Mot{10R9} 34b13 34=26 34<48 66l8 66t20 79s17
 34a26 Text{string} 41r13 43r18 52r13 61r16 62m10
 34b48 Trouve{boolean} 39m7 44m13
 35i7 I{integer} 41r18 42m10 42r15 43r13 49r20 52r18 55m13 55r18 59r18 61r28
 36r7 Pos{10R9} 49m7 59m7 65r14
 37b7 Fin{boolean} 41r35 45m13 51r17 53m13
 61i11 J{integer} 62r15
-70U14 Fnd_Mot 70b14 70>23 93l8 93t15 97s4
-70a23 Txt{string} 75r21 75r35 87r20
-71b7 Fini{boolean} 77r17 81m13
-72i7 Compteur{integer} 84m13 84r25 85r43
-73r7 Pos{10R9} 78m10 86r22 86r33
-74b7 Trouve{boolean} 78m36 78r36 80r17
-75a7 Text{string} 78m30 78r30 88m16
-86i17 I{integer} 87r24 88r21
+70U14 Fnd_Mot 70b14 70>23 94l8 94t15 98s4
+70a23 Txt{string} 75r21 75r35 88r20
+71b7 Fini{boolean} 78r17 82m13
+72i7 Compteur{integer} 85m13 85r25 86r43
+73r7 Pos{10R9} 79m10 87r22 87r33
+74b7 Trouve{boolean} 79m36 79r36 81r17
+75a7 Text{string} 79m30 79r30 89m16
+87i17 I{integer} 88r24 89r21
 

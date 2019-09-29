@@ -73,6 +73,7 @@ procedure Chaine is
       Pos : Position;
       Trouve : Boolean;
       Text : String(Txt'Range) := Txt; -- question de compatibilité
+      
    begin
       while not Fini loop
 	 Pos := Extraire_Mot(Text, Trouve);
