@@ -11,6 +11,11 @@ procedure Recursivite is
       Find : Boolean := False;
    begin      
       --Etude des cas
+      if (V'Length = 2 and V(V'First) /= Middle and V(V'Last) /= Middle) or Middle = 0 then
+	 Middle := 0;
+	 return Middle;
+      end if;
+      
       if Value > V(Middle) then
 	 declare
 	    V2 : Vector(Middle..V'Last) := V(Middle..V'Last);
@@ -29,6 +34,7 @@ procedure Recursivite is
       return Middle;
    end Dichoto;
    
+   --Procédure de test de Dichoto
    procedure Test_Dichoto(V : Vector; Value : Integer) is
    begin
       Put_Line(" Tableau saisie : ");
@@ -37,7 +43,11 @@ procedure Recursivite is
       end loop;
       New_Line;
       Put_Line("Valeur recherchée : " & Integer'Image(Value));
-      Put_Line("Valeur trouvée : " & Integer'Image(V(Dichoto(V, Value))));
+      if Dichoto(V, Value) /= 0 then
+	 Put_Line("Valeur trouvée : " & Integer'Image(V(Dichoto(V, Value))));
+      else 
+	 Put_Line("La valeur n'existe pas dans le tableau");
+      end if;
    end Test_Dichoto;
    
    V1 : Vector(1..20) := (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
@@ -45,4 +55,5 @@ procedure Recursivite is
 begin
    Test_Dichoto(V1, 16);
    Test_Dichoto(V2, 56);
+   Test_Dichoto(V2, 31);
 end Recursivite;
