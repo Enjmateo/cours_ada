@@ -6,16 +6,21 @@ use ada.Text_IO;
 
 procedure Test_Tri is
    
+   -- Variables globales
+   TMP : constant Duration := 0.1;
+   
    -- Type tableau 
    type nbr is array (Integer range <>) of Integer;
    type Grille is array (Integer range <>, Integer range <>) of character;
    subtype Double is Integer range 0..65535;
    type P_procedure is access procedure (Tab : in out Nbr);
    
+   
    -- Package pour l'aléatoire
    package Aleatoire is new Ada.Numerics.Discrete_Random(Double);
    use Aleatoire;
    Hasard : Generator;
+   
    
    -- Procédure d'affichage d'un tableau de manière graphique
    procedure Aff (Tab : in  Nbr) is
@@ -30,10 +35,8 @@ procedure Test_Tri is
 	    Max := K;
 	    Value := Tab(K);
 	 end if;
-      end loop;
-      
+      end loop; 
       Value := 0;
-      
       -- Préparation affichage
       for I in Tab'Range loop
 	 Value := ((Tab(I)*Tab'Last)/(Tab(Max)+1));
@@ -41,7 +44,6 @@ procedure Test_Tri is
 	    G(J,I) := '#';
 	 end loop;
       end loop;
-      
       --Affichage
       for H in G'Range(1) loop
 	 for V in G'Range(2) loop
@@ -50,6 +52,7 @@ procedure Test_Tri is
 	 New_Line;
       end loop;
    end Aff;
+   
    
    -- Procédure de tri d'un tableau (Tri bulle)
    procedure Tri_Bulle (Tab : in out Nbr) is
@@ -63,8 +66,11 @@ procedure Test_Tri is
 	       Tab(I) := K;
 	    end if;
 	 end loop;
+	 delay TMP;
+	 Aff(Tab);
       end loop;
    end Tri_Bulle;
+   
    
    -- Tri selection
    procedure Tri_Selection (Tab : in out Nbr) is
@@ -73,31 +79,33 @@ procedure Test_Tri is
       Buffer : Integer;
    begin
       for J in Tab'Range loop
-	 for I in ((Tab'First-J)+1)..Tab'last loop
+	 Vmin := Integer'Last;
+	 for I in ((Tab'First+J-1))..Tab'last loop
 	    if VMin > Tab(I) then
 	       VMin := Tab(I);
 	       Min := I;
 	    end if;
 	 end loop;
-	 Buffer := Tab(Tab'First);
-	 Tab(Tab'First) := VMin;
+	 Buffer := Tab(Tab'First+J-1);
+	 Tab(Tab'First+J-1) := Tab(Min);
 	 Tab(Min) := Buffer;
+	 delay TMP;
+	 Aff(Tab);
+	 
       end loop;
    end Tri_Selection;
+   
    
    -- Test de la procédure tri
    procedure Test_Tri (F : P_Procedure) is
       test_tri1 : nbr(1..40);
    begin
       Put_Line("------------------");
-      Put_Line("TEST TRI");
       for J in Test_Tri1'Range loop
 	 Test_Tri1(J) := Random(Hasard);
       end loop;
       
-      Aff(Test_Tri1);
       F(test_tri1);
-      Aff(Test_Tri1);
    end Test_tri;
    
    
@@ -109,6 +117,7 @@ begin
    
    --Test des fonctions
    F1 := Tri_Bulle'Access;
-   F2 := Tri_Bulle'Access;
-   Test_Tri(F1); Test_Tri(F2);
+   F2 := Tri_Selection'Access;
+   Test_Tri(F1); 
+   Test_Tri(F2);
 end Test_Tri;
