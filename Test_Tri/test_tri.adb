@@ -41,7 +41,7 @@ procedure Test_Tri is
       for I in Tab'Range loop
 	 Value := ((Tab(I)*Tab'Last)/(Tab(Max)+1));
 	 for J in G'First(2)..Value loop
-	    G(J,I) := '#';
+	    G(J,I) := '|';
 	 end loop;
       end loop;
       --Affichage
