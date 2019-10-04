@@ -95,5 +95,6 @@ procedure Chaine is
    
    
 begin
+   Put_Line("Saisir une phrase : ");
    Fnd_Mot(Lire_Entree);
 end Chaine;
