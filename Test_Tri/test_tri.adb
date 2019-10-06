@@ -1,20 +1,20 @@
 with ada.Text_IO, Ada.Integer_Text_IO;
 with Ada.Numerics.Discrete_Random;
-with ada.Calendar;
 
 use ada.Text_IO;
 
 procedure Test_Tri is
    
    -- Variables globales
-   TMP : constant Duration := 0.1;
+   TMP : constant Duration := 0.2;
    
    -- Type tableau 
    type nbr is array (Integer range <>) of Integer;
    type Grille is array (Integer range <>, Integer range <>) of character;
    subtype Double is Integer range 0..65535;
-   type P_procedure is access procedure (Tab : in out Nbr);
    
+   -- Pointeurs
+   type P_procedure is access procedure (Tab : in out Nbr);
    
    -- Package pour l'aléatoire
    package Aleatoire is new Ada.Numerics.Discrete_Random(Double);
@@ -98,7 +98,7 @@ procedure Test_Tri is
    
    -- Test de la procédure tri
    procedure Test_Tri (F : P_Procedure) is
-      test_tri1 : nbr(1..40);
+      test_tri1 : nbr(1..50);
    begin
       Put_Line("------------------");
       for J in Test_Tri1'Range loop
