@@ -12,12 +12,27 @@ procedure Pointeurs is
    end record;
    
    -- Procédure d'affichage d'une liste
-   procedure Afficher (Liste : Liste) is
+   procedure Afficher (Lst2 : in Liste) is
+      Aff : Boolean := True;
+      Lst : Liste := Lst2;
    begin
-      null;
+      while aff loop
+	 if Lst.all.Suiv = null then
+	    Aff := False;
+	 end if;
+	 
+	 Put_Line(Integer'Image(Lst.all.Info));
+	 Lst := Lst.all.Suiv;
+      end loop;
    end Afficher;
    
+   -- Procédure d'affichage en sens inverse d'une liste
+   procedure Afficher_Inverse is
+   begin
+      null;
+   end Afficher_Inverse;
    
+   L : Liste := new Cellule'(1, new Cellule'(2, new Cellule'(3, null)));
 begin
-   null;
+   Afficher(L);
 end Pointeurs;
