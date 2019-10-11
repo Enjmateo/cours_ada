@@ -144,7 +144,7 @@ procedure Main is
 
          detect_loop(temp);
          if data_dect(FND) = 1 then
-            Put_Line("Boucle dans l'algorthme");
+            Put_Line("Boucle dans l'algorithme");
             nombre := temp;
          end if;
 
