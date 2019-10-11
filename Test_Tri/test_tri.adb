@@ -6,7 +6,7 @@ use ada.Text_IO;
 procedure Test_Tri is
    
    -- Variables globales
-   TMP : constant Duration := 0.2;
+   TMP : constant Duration := 0.1;
    
    -- Type tableau 
    type nbr is array (Integer range <>) of Integer;
