@@ -3,6 +3,9 @@ with Ada.Numerics.Discrete_Random;
 
 use ada.Text_IO;
 
+-- Lib C pour intefacer avec le system
+with Interfaces.C; use Interfaces.C;
+
 procedure Test_Tri is
    
    -- Variables globales
@@ -21,14 +24,20 @@ procedure Test_Tri is
    use Aleatoire;
    Hasard : Generator;
    
+   -- Commandes systeme via C
+   function System (Cmd : Interfaces.C.Char_Array) return Interfaces.C.int;
+   pragma Import (C, System, "system");
+   
    
    -- Procédure d'affichage d'un tableau de manière graphique
    procedure Aff (Tab : in  Nbr) is
-      Hauteur : constant Integer := Tab'Last;
+      Hauteur : constant Integer := 40;
       Value : Integer := 0;
-      G : Grille(Tab'Range, 1..Hauteur) := (others => (others => ' '));
+      G : Grille(Tab'First..Hauteur, Tab'range) := (others => (others => ' '));
       Max : Integer := 0;
+      Err : Interfaces.C.int;
    begin
+      Err := System("clear");
       -- Recherche du max
       for K in Tab'Range loop
 	 if Value < Tab(K) then
@@ -39,7 +48,7 @@ procedure Test_Tri is
       Value := 0;
       -- Préparation affichage
       for I in Tab'Range loop
-	 Value := ((Tab(I)*Tab'Last)/(Tab(Max)+1));
+	 Value := ((Tab(I)*Hauteur)/(Tab(Max)+1));
 	 for J in G'First(2)..Value loop
 	    G(J,I) := '|';
 	 end loop;
@@ -47,7 +56,7 @@ procedure Test_Tri is
       --Affichage
       for H in G'Range(1) loop
 	 for V in G'Range(2) loop
-	    Put(G(G'Last-H+1,V) & " ");
+	    Put(G(G'Last-H+1,V) & "");
 	 end loop;
 	 New_Line;
       end loop;
@@ -66,8 +75,8 @@ procedure Test_Tri is
 	       Tab(I) := K;
 	    end if;
 	 end loop;
-	 delay TMP;
 	 Aff(Tab);
+	 delay TMP;
       end loop;
    end Tri_Bulle;
    
@@ -89,16 +98,15 @@ procedure Test_Tri is
 	 Buffer := Tab(Tab'First+J-1);
 	 Tab(Tab'First+J-1) := Tab(Min);
 	 Tab(Min) := Buffer;
-	 delay TMP;
 	 Aff(Tab);
-	 
+	 delay TMP;
       end loop;
    end Tri_Selection;
    
    
    -- Test de la procédure tri
    procedure Test_Tri (F : P_Procedure) is
-      test_tri1 : nbr(1..50);
+      test_tri1 : nbr(1..100);
    begin
       Put_Line("------------------");
       for J in Test_Tri1'Range loop
@@ -111,13 +119,24 @@ procedure Test_Tri is
    
    F1 : P_Procedure;
    F2 : P_Procedure;
+   Iteration : Integer := 0;
 begin
    --Renitialisation du générateur
    Reset(Hasard);
    
-   --Test des fonctions
-   F1 := Tri_Bulle'Access;
-   F2 := Tri_Selection'Access;
-   Test_Tri(F1); 
-   Test_Tri(F2);
+   -- Présentation de l'algorithme
+   Put_Line("Algorithme d'affichage d'algorithme de tri");
+   Put_Line("Compatible avec les sytemes UNIX uniquement");
+   Put_Line("Gasc Mayeul - 2019 - N'hésitez pas à reporter les bugs ;)");
+   New_Line;
+   Put("Nbr de boucles : ");
+   Ada.Integer_Text_IO.Get(Iteration);
+   
+   for I in 1..Iteration loop
+      --Test des fonctions
+      F1 := Tri_Bulle'Access;
+      F2 := Tri_Selection'Access;
+      Test_Tri(F1); 
+      Test_Tri(F2);
+   end loop;
 end Test_Tri;
