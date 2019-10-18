@@ -6,16 +6,16 @@ procedure Somme is
    -- Type
    type Tab is array(Integer range <>) of Float;
    
-   function Add(T : Tab; I : Integer) return Float is
+   function Add(T : Tab) return Float is
    begin
-      if I = T'Last then
-	 return T(I);
+      if T'Length <= 1 then
+	 return T(T'Last);
       else
-	 return T(I) + Add(T, I + 1);
+	 return T(T'First) + Add(T(T'First + 1.. T'Last));
       end if;
    end Add;
    
    T : Tab := (1.0, 1.5, 4.3);
 begin
-   Put_Line(Float'Image(Add(T, T'First)));
+   Put_Line(Float'Image(Add(T)));
 end Somme;
