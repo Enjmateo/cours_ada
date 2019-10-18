@@ -36,7 +36,7 @@ procedure Labyrinthe is
 	    Trouver_Sortie(L, X-1, Y);
 	 elsif L(X,Y-1) = '.' then
 	    Trouver_Sortie(L, X, Y-1);
-	 end if;
+	 end if; 
       end if;
       L(X,Y) := '@';
       Put_Line("(" & Integer'Image(X) & "; " & Integer'Image(Y) & ")");
