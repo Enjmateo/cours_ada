@@ -13,6 +13,9 @@ procedure Pointeurs is
    
    Ajout_Imp : exception;
    
+   -----------------------------
+   --    TD4 : pointeurs 1    --
+   -----------------------------
    
    -- Procédure d'affichage d'une liste
    procedure Afficher (Lst2 : in Liste) is
@@ -20,6 +23,9 @@ procedure Pointeurs is
       Lst : Liste := Lst2;
    begin
       Put("[ ");
+      
+      if Lst = null then Aff := False; end if;
+      
       while aff loop
 	 if Lst.all.Suiv = null then
 	    Aff := False;
@@ -126,19 +132,106 @@ procedure Pointeurs is
    
    
    
+   -----------------------------
+   --    TD5 : pointeurs 2    --
+   -----------------------------
+   
+   -- Fonction copie - Version récursive
+   function Copie(Lst : in Liste) return Liste is
+   begin
+      if Lst = null then
+	return null;
+      else 
+	  return new Cellule'(Lst.all.Info, Copie(Lst.all.suiv));
+      end if;
+   end Copie;
+   
+   
+   -- Procédure de concaténation avec destruction
+   procedure Concatenation(L1, L2 : in out Liste) is
+      L1buf : Liste := L1;
+   begin
+      while L1buf.all.suiv /= null loop
+	 L1buf := L1buf.all.Suiv;
+      end loop;
+      L1buf.all.Suiv := L2;
+      L2 := null;
+   end Concatenation;
+   
+   
+   -- Fonction de concaténation sans destruction
+   function Concatenation_safe(L1, L2 : in Liste) return Liste is
+      L1buf : Liste := null;
+      L1bufaux : Liste := null;
+   begin
+      L1buf := Copie(L1);
+      L1bufaux := L1buf;
+      while L1bufaux.all.suiv /= null loop
+	 L1bufaux := L1bufaux.all.Suiv;
+      end loop;
+      L1bufaux.all.Suiv := L2;
+      return L1buf;
+   end Concatenation_safe;
+   
+   
+   -- Fonction de fusion
+   function Fusion(L1, L2 : in Liste) return Liste is
+      M1 : Liste := L1;
+      M2 : Liste := L2;
+      Fusion : Liste := null;
+   begin
+      while ((M1 /= null) and (M2 /= null)) loop
+	 if (M1.all.Info <= M2.all.Info) then
+	    Ajout_Cellule(Fusion, M1.all.Info);
+	    M1 := M1.all.Suiv;
+	 end if;
+	 if (M1.all.Info > M2.all.Info) then
+	    Ajout_Cellule(Fusion, M2.all.Info);
+	    M2 := M2.all.Suiv;
+	 end if;
+      end loop;
+      return Fusion;
+   end Fusion;
+   
+   
    L : Liste := null;
+   L2 : Liste := null;
+   L3 : Liste := null;
 begin
+   -----------------------------
+   --    TD4 : pointeurs 1    --
+   -----------------------------
    for I in 1..10 loop
       Ajout_Cellule(L,I);
    end loop;
-   Ajout_Cellule(L,22);
-   Ajout_Cellule(L,41);
+   --Ajout_Cellule(L,22);
+   --Ajout_Cellule(L,41);
+   --
+   --Afficher(L);
+   --New_Line;
+   --Put_Line("Tri des nb pairs et impairs");
+   --Afficher(Trier_Liste(L));
+   --Afficher(L);
+   
+   -----------------------------
+   --    TD5 : pointeurs 2    --
+   -----------------------------
+   -- Création des listes
+   L2 := Copie(L);
+   Ajout_Cellule(L, 22);
+   Ajout_Cellule(L3, 3);
+   Ajout_Cellule(L3, 5);
+   Ajout_Cellule(L3, 7);
+   Ajout_Cellule(L3, 9);
    
    Afficher(L);
-   New_Line;
-   Put_Line("Tri des nb pairs et impairs");
-   Afficher(Trier_Liste(L));
-   Afficher(L);
+   --Afficher(L2);
+   Afficher(L3);
+   --Afficher(Concatenation_safe(L, L2));
+   --Afficher(L);
+   --Afficher(L2);
+   Afficher(Fusion(L,L3));
+   
 exception
    when Ajout_Imp => Put_Line("Tentative d'accès à une cellule inexistante");
 end Pointeurs;

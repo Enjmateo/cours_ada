@@ -9,7 +9,7 @@ with Interfaces.C; use Interfaces.C;
 procedure Test_Tri is
    
    -- Variables globales
-   TMP : constant Duration := 0.1;
+   TMP : constant Duration := 0.3;
    
    -- Type tableau 
    type nbr is array (Integer range <>) of Integer;
@@ -106,7 +106,7 @@ procedure Test_Tri is
    
    -- Test de la procédure tri
    procedure Test_Tri (F : P_Procedure) is
-      test_tri1 : nbr(1..100);
+      test_tri1 : nbr(1..200);
    begin
       Put_Line("------------------");
       for J in Test_Tri1'Range loop
