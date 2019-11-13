@@ -181,7 +181,6 @@ procedure Pointeurs is
       Fusion : Liste := null;
    begin
       while ((M1 /= null) and (M2 /= null)) loop
-	 
 	 if (M1.all.Info <= M2.all.Info) then
 	    Ajout_Cellule(Fusion, M1.all.Info);
 	    M1 := M1.all.Suiv;  
@@ -189,7 +188,6 @@ procedure Pointeurs is
 	    Ajout_Cellule(Fusion, M2.all.Info);
 	    M2 := M2.all.Suiv;
 	 end if;
-	 
       end loop;
       
       if M1 = null then
