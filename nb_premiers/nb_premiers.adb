@@ -6,13 +6,28 @@ use Ada.Numerics.Elementary_Functions;
 
 procedure Nb_Premiers is
    
+   --Fonction pour limiter le nombre de digits, faux si trop grand
+   --function digit(N : Long_Integer) return Boolean is
+   --   Taille_Min : constant Natural := 19;
+   --   N3 : Long_Integer := 0;
+   --   N4 : Integer := 0;
+   --begin
+   --   N3 := 10;
+   --   N4 := Integer(Mode(N));
+   --   for J in 1..N4 loop
+   --     N3 := N3 * 10;
+   --   end loop;
+   --   return (N-N3)>0 ;
+   --end digit;
+
+      
    
    -- Fonction de test de nb premiers
    function Is_Prime(N : Long_Integer) return Boolean is
       Prime : Boolean := True;
    begin
-      for I in 2..Integer(Sqrt(Float(N))) loop
-	 if (Float(Integer(N)/I)=Float(Integer(N))/Float(i)) then 
+      for I in 2..Long_Integer(Sqrt(Float(N))) loop
+	 if N mod Long_Integer(I) = 0 then 
 	    Prime := False;
 	    exit;
 	 end if;
@@ -56,12 +71,17 @@ procedure Nb_Premiers is
    -- Recherche de nombres premiers tromcables
    procedure Troncable(N : Long_Integer) is
       N2 : Long_Integer := 0;
+      N3 : Long_Integer := 0;
    begin
       if Is_Prime(N) then
 	 --Put_Line(Long_Integer'Image(N));
 	 Aff_Troncable(N);
 	 for I in 1..9 loop
-	    N2 := N + Long_Integer(I*10**(Integer((Mode(N) - 1))));
+	    N3 := 10;
+	    for J in 1..(Mode(N) - 2) loop
+	       N3 := N3 * 10;
+	    end loop;	    
+	    N2 := N + Long_Integer(I)*N3;
 	    Troncable(N2);
 	 end loop;
       end if;
@@ -70,10 +90,11 @@ procedure Nb_Premiers is
    
    
 begin
-   --IP(16396997);
-   for I in 0..9 loop
+   --IP(67629137);
+   --Troncable(7629137);
+   for I in 1..9 loop
       Troncable(Long_Integer(I));
       null;
    end loop;
-   --Put_Line(Integer'Image(Integer'Last));
+   Put_Line(Integer'Image(Integer'Last));
 end Nb_Premiers;
