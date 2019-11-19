@@ -30,6 +30,15 @@ procedure Nb_Premiers is
       end if;
    end IP;
    
+   -- Afficher les nb troncables d'une certaine taille
+   procedure Aff_Troncable(N : Long_Integer) is
+      Taille_Min : constant Natural := 8; --Nombre de digits des nombres affichés
+   begin
+      if (N-10**(Taille_Min-1))>0 then
+	 Put_Line(Long_Integer'Image(N));
+      end if;
+   end Aff_Troncable;
+   
    
    -- Puissance de 10
    function mode(M : Long_Integer) return Long_Integer is 
@@ -48,7 +57,8 @@ procedure Nb_Premiers is
       N2 : Long_Integer := 0;
    begin
       if Is_Prime(N) then
-	 Put_Line(Long_Integer'Image(N));
+	 --Put_Line(Long_Integer'Image(N));
+	 Aff_Troncable(N);
 	 for I in 1..9 loop
 	    N2 := N + Long_Integer(I*10**(Integer((Mode(N) - 1))));
 	    if Is_Prime(N2) then
