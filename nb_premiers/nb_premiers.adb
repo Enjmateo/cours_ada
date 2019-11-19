@@ -36,6 +36,7 @@ procedure Nb_Premiers is
    begin
       if (N-10**(Taille_Min-1))>0 then
 	 Put_Line(Long_Integer'Image(N));
+	 --IP(N);
       end if;
    end Aff_Troncable;
    
@@ -61,9 +62,7 @@ procedure Nb_Premiers is
 	 Aff_Troncable(N);
 	 for I in 1..9 loop
 	    N2 := N + Long_Integer(I*10**(Integer((Mode(N) - 1))));
-	    if Is_Prime(N2) then
-	       Troncable(N2);
-	    end if;
+	    Troncable(N2);
 	 end loop;
       end if;
    end Troncable;
@@ -71,9 +70,10 @@ procedure Nb_Premiers is
    
    
 begin
-   --IP(37);
+   --IP(16396997);
    for I in 0..9 loop
       Troncable(Long_Integer(I));
+      null;
    end loop;
    --Put_Line(Integer'Image(Integer'Last));
 end Nb_Premiers;
