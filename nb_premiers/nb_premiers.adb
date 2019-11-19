@@ -32,7 +32,7 @@ procedure Nb_Premiers is
    
    -- Afficher les nb troncables d'une certaine taille
    procedure Aff_Troncable(N : Long_Integer) is
-      Taille_Min : constant Natural := 8; --Nombre de digits des nombres affichés
+      Taille_Min : constant Natural := 1; --Nombre de digits des nombres affichés
    begin
       if (N-10**(Taille_Min-1))>0 then
 	 Put_Line(Long_Integer'Image(N));
