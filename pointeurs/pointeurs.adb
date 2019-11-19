@@ -1,7 +1,10 @@
 with Ada.Text_IO;
+with Ada.Integer_text_IO;
 use Ada.Text_IO;
 
 procedure Pointeurs is
+   
+   package Int renames Ada.Integer_Text_Io;
    
    --types
    type Cellule;
@@ -38,9 +41,12 @@ procedure Pointeurs is
    
    
    -- Procédure d'affichage en sens inverse d'une liste
-   procedure Afficher_Inverse is
+   procedure Afficher_Inverse(Lst : in Liste) is
    begin
-      null;
+      if Lst.all.Suiv /= null then
+	 Afficher_Inverse(Lst.all.suiv);
+      end if;
+      Put(Integer'Image(Lst.all.Info) & " ;");
    end Afficher_Inverse;
    
    
@@ -200,10 +206,57 @@ procedure Pointeurs is
    end Fusion;
    
    
+   -- Fonction interactive de saisie de liste
+   function Saisir_Liste return Liste is
+      N : Integer := 0;
+      Lst : Liste := null;
+   begin
+      Put_Line("Saisir une liste de nombre : ");
+      while not End_Of_Line loop
+	 Int.Get(N);
+	 Ajout_Cellule(Lst, N);
+      end loop;
+      Put_Line("Liste créée : ");
+      Afficher(Lst);
+      return Lst;
+   end Saisir_Liste;
+   
+   
+   -- Fonction interactive de saisie de liste - version 2 : on utilise pas Ajout_cellule()
+   function Saisir_Liste_2 return Liste is
+      N : Integer := 0;
+      Lst : Liste := null;
+      P_Fin : Liste := null;
+   begin
+      Put_Line("Saisir une liste de nombre : ");
+      while not End_Of_Line loop
+	 Int.Get(N);
+	 if Lst = null then
+	    Lst := new Cellule'(N, null);
+	    P_Fin := Lst;
+	 else
+	    P_Fin.all.Suiv := new Cellule'(N, null);
+	    P_Fin := P_Fin.all.Suiv;
+	 end if;
+      end loop;
+      Put_Line("Liste créée : ");
+      Afficher(Lst);
+      return Lst;
+   end Saisir_Liste_2;
+   
+   
+   
+   
+   -----------------------------
+   -----------------------------
+   
+   
+   
    L : Liste := null;
    L2 : Liste := null;
    L3 : Liste := null;
-begin
+   L4 : Liste := null;
+begin   
    -----------------------------
    --    TD4 : pointeurs 1    --
    -----------------------------
@@ -230,14 +283,16 @@ begin
    Ajout_Cellule(L3, 7);
    Ajout_Cellule(L3, 9);
    
-   Afficher(L);
+   --Afficher_Inverse(L);
+   --Afficher(L);
    --Afficher(L2);
-   Afficher(L3);
+   --Afficher(L3);
    --Afficher(Concatenation_safe(L, L2));
    --Afficher(L);
    --Afficher(L2);
-   Afficher(Fusion(L3,L));
+   --Afficher(Fusion(L3,L));
    
+   L4 := Saisir_Liste_2;
 exception
    when Ajout_Imp => Put_Line("Tentative d'accès à une cellule inexistante");
 end Pointeurs;
