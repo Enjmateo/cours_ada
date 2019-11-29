@@ -1,7 +1,9 @@
 with ada.Text_IO, Ada.Integer_Text_IO;
 with Ada.Numerics.Discrete_Random;
+with Ada.Command_Line;
 
 use ada.Text_IO;
+use Ada.Command_Line;
 
 -- Lib C pour intefacer avec le system
 with Interfaces.C; use Interfaces.C;
@@ -9,7 +11,7 @@ with Interfaces.C; use Interfaces.C;
 procedure Test_Tri is
    
    -- Variables globales
-   TMP : constant Duration := 0.1;
+   TMP : constant Duration := 0.05;
    
    -- Type tableau 
    type nbr is array (Integer range <>) of Integer;
@@ -31,7 +33,7 @@ procedure Test_Tri is
    
    -- Procédure d'affichage d'un tableau de manière graphique
    procedure Aff (Tab : in  Nbr) is
-      Hauteur : constant Integer := 40;
+      Hauteur : constant Integer := 60;
       Value : Integer := 0;
       G : Grille(Tab'First..Hauteur, Tab'range) := (others => (others => ' '));
       Max : Integer := 0;
@@ -60,6 +62,7 @@ procedure Test_Tri is
 	 end loop;
 	 New_Line;
       end loop;
+      delay 0.05;
    end Aff;
    
    
@@ -106,7 +109,7 @@ procedure Test_Tri is
    
    -- Test de la procédure tri
    procedure Test_Tri (F : P_Procedure) is
-      test_tri1 : nbr(1..100);
+      test_tri1 : nbr(1..150);
    begin
       Put_Line("------------------");
       for J in Test_Tri1'Range loop
@@ -129,8 +132,17 @@ begin
    Put_Line("Compatible avec les sytemes UNIX uniquement");
    Put_Line("Gasc Mayeul - 2019 - N'hésitez pas à reporter les bugs ;)");
    New_Line;
-   Put("Nbr de boucles : ");
-   Ada.Integer_Text_IO.Get(Iteration);
+   Put_Line("Le nombre d'itération peut être donné en argument");
+   
+   delay 4.0;
+   
+   if Argument_Count = 1 then 
+      Iteration := Integer'Value(Argument(1));
+   else
+      New_Line;
+      Put("Nbr de boucles : ");
+      Ada.Integer_Text_IO.Get(Iteration);
+   end if;
    
    for I in 1..Iteration loop
       --Test des fonctions
