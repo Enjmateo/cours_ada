@@ -14,12 +14,16 @@ procedure Nb_Premiers is
    function Is_Prime(N : Long_Integer) return Boolean is
       Prime : Boolean := True;
    begin
-      for I in 2..Long_Integer(Sqrt(Float(N))) loop
-	 if N mod Long_Integer(I) = 0 then 
-	    Prime := False;
-	    exit;
-	 end if;
-      end loop;
+      if N mod Long_Integer(2) = 0 then
+	 Prime := False;
+      else
+	 for I in 2..(Long_Integer(Sqrt(Float(N)))/2) loop
+	    if N mod Long_Integer(2*I-1) = 0 then 
+	       Prime := False;
+	       exit;
+	    end if;
+	 end loop;
+      end if;
       return prime;
    end Is_Prime;
    
@@ -35,12 +39,9 @@ procedure Nb_Premiers is
    
    -- Afficher les nb troncables d'une certaine taille
    procedure Aff_Troncable(N : Long_Integer) is
-      T_Min : constant Natural := 1; --Nombre de digits des nombres affichés
+      --T_Min : constant Natural := 1; --Nombre de digits des nombres affichés
    begin
-      if (N-10**(T_Min-1))>0 then
-	 Put_Line(Long_Integer'Image(N));
-	 --IP(N);
-      end if;
+      Put_Line(Long_Integer'Image(N));
    end Aff_Troncable;
    
    
@@ -67,29 +68,25 @@ procedure Nb_Premiers is
    
    -- Recherche de nombres premiers tromcables
    procedure Troncable(N : Long_Integer) is
-      N2 : Long_Integer := 0;
       N3 : Long_Integer := 0;
    begin
-      if Is_Prime(N) and Digit(N) then
-	 --Put_Line(Long_Integer'Image(N));
+      if Is_Prime(N) then
 	 Aff_Troncable(N);
+	 if Digit(N) then
 	    for I in 1..9 loop
 	       N3 := 10;
 	       for J in 1..(Mode(N) - 2) loop
 		  N3 := N3 * 10;
 	       end loop;	    
-	       N2 := N + Long_Integer(I)*N3;
-	       Troncable(N2);
+	       Troncable(N + Long_Integer(I)*N3);
 	    end loop;
+	 end if;
       end if;
    end Troncable;
    
    
-   
 begin
-   
    for I in 1..9 loop
       Troncable(Long_Integer(I));
-      null;
    end loop;
 end Nb_Premiers;
