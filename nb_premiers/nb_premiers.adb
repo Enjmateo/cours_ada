@@ -58,22 +58,14 @@ procedure Nb_Premiers is
    end mode;
    
    
-   --Fonction pour limiter le nombre de digits, faux si trop grand
-   function Digit(N : Long_Integer) return Boolean is
-      T_Max : constant Natural :=17;
-      M : Long_Integer := 10**Integer(T_Max);
-   begin
-      return (N-M <= Long_Integer(0));
-   end Digit;
-   
    -- Recherche de nombres premiers tromcables
    procedure Troncable(N : Long_Integer) is
       N3 : Long_Integer := 0;
    begin
       if Is_Prime(N) then
 	 Aff_Troncable(N);
-	 if Digit(N) then
-	    for I in 1..9 loop
+	 if N < (Long_Integer'Last / 11) then
+	    for I in 1..10 loop
 	       N3 := 10;
 	       for J in 1..(Mode(N) - 2) loop
 		  N3 := N3 * 10;
