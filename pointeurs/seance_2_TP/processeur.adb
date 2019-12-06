@@ -19,7 +19,7 @@ procedure Processeur is
       Suiv : Liste;
    end record;
    
-   
+   Q : constant Natural := 1;
    
    --------------------------
    --    TP4 : Séance 2    --
@@ -29,19 +29,22 @@ procedure Processeur is
    procedure Afficher (Lst2 : in Liste) is
       Aff : Boolean := True;
       Lst : Liste := Lst2;
+      Debut : Integer := 0;
    begin
-      Put("[ ");
+      Put("    [ ");
       
       if Lst = null then Aff := False; end if;
       
+      Debut := Lst.all.Info.Num;
       while aff loop
-	 if Lst.all.Suiv = null then
+	 if Lst.all.Suiv.all.Info.Num = debut then
 	    Aff := False;
 	 end if;
 	 Put("PID:" & Integer'Image(Lst.all.Info.Num) & ",Q=" & Integer'Image(Lst.all.Info.Dur) & "; ");
 	 Lst := Lst.all.Suiv;
       end loop;
       Put_Line("]");
+      New_Line;
    end Afficher;
    
    -- Fonction de suppression d'élément 
@@ -57,6 +60,7 @@ procedure Processeur is
       end loop;
       if Prec.all.Suiv = Lst.all.Suiv then
 	 Lst := null;
+	 Put_Line("Tache n°" & Integer'Image(N) & " supprimée.");
       else
 	 Prec.all.Suiv := Lst.all.Suiv;
 	 Lst := Lst.all.Suiv;
@@ -72,10 +76,9 @@ procedure Processeur is
       Lst : Liste := null;
       P_Lst : Liste := null;
    begin
-      Lst := new Tache'((1,5), null);
+      Lst := new Tache'((1,3), new Tache'((2,5), new Tache'((3,2), new Tache'((4,3), null))));
       P_Lst := Lst;
-      for I in 2..5 loop
-	 P_Lst.all.Suiv := new Tache'((I,(6-I)), null);
+      while P_Lst.all.suiv /= null loop
 	 P_Lst := P_Lst.all.Suiv;
       end loop;
       P_Lst.all.Suiv := Lst;
@@ -83,18 +86,30 @@ procedure Processeur is
       return Lst;
    end Init;
    
+   -- procedure de gestion des taches
    procedure Processeur(Lst : in out Liste) is
    begin
       while Lst /= null loop
-	 Lst.all.Info.Dur := Lst.all.Info.Dur - 1;
-	 Put_Line("La tâche n°" & Lst.all.Info.Num & " est passée dans le processeur pendant 1 quantum.");
+	 Lst.all.Info.Dur := Lst.all.Info.Dur - Q;
+	 Put_Line("La tâche n°" & Integer'Image(Lst.all.Info.Num) & " est passée dans le processeur pendant un quantum.");
+	 
 	 if Lst.all.Info.Dur <= 0 then
-	    Del_Tache(Lst.all.Info.Num, Lst);
+	    Put("Une tâche est terminée. ");
+	    Lst := Del_Tache(Lst.all.Info.Num, Lst);
+	    if Lst /= null then
+	       Lst := Lst.all.Suiv;
+	       --Afficher(Lst);
+	    end if;
+	 else
+	    Lst := Lst.all.Suiv;
+	    --Afficher(Lst);
 	 end if;
       end loop;
+      Put_Line("La liste des tâches est vide. Fin d'éxécution.");
    end Processeur;
    
    Lst : Liste := null;
 begin
    Lst := Init;
+   Processeur(Lst);
 end Processeur;

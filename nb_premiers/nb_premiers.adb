@@ -64,8 +64,16 @@ procedure Nb_Premiers is
    begin
       if Is_Prime(N) then
 	 Aff_Troncable(N);
-	 if N < (Long_Integer'Last / 11) then
+	 if N < (Long_Integer'Last / 100) then
 	    for I in 1..10 loop
+	       N3 := 10;
+	       for J in 1..(Mode(N) - 2) loop
+		  N3 := N3 * 10;
+	       end loop;	    
+	       Troncable(N + Long_Integer(I)*N3);
+	    end loop;
+	 elsif N < (Long_Integer'Last / 11) then
+	    for I in 1..8 loop
 	       N3 := 10;
 	       for J in 1..(Mode(N) - 2) loop
 		  N3 := N3 * 10;
@@ -78,7 +86,9 @@ procedure Nb_Premiers is
    
    
 begin
+   IP(Long_Integer'Last);
    for I in 1..9 loop
-      Troncable(Long_Integer(I));
+      null;
+      --Troncable(Long_Integer(I));
    end loop;
 end Nb_Premiers;
