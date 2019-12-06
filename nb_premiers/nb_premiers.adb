@@ -86,9 +86,9 @@ procedure Nb_Premiers is
    
    
 begin
-   IP(Long_Integer'Last);
+   --IP(Long_Integer'Last);
    for I in 1..9 loop
       null;
-      --Troncable(Long_Integer(I));
+      Troncable(Long_Integer(I));
    end loop;
 end Nb_Premiers;
