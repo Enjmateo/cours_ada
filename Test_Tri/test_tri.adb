@@ -33,7 +33,7 @@ procedure Test_Tri is
    
    -- Procédure d'affichage d'un tableau de manière graphique
    procedure Aff (Tab : in  Nbr) is
-      Hauteur : constant Integer := 60;
+      Hauteur : constant Integer := 50;
       Value : Integer := 0;
       G : Grille(Tab'First..Hauteur, Tab'range) := (others => (others => ' '));
       Max : Integer := 0;
@@ -130,7 +130,6 @@ begin
    -- Présentation de l'algorithme
    Put_Line("Algorithme d'affichage d'algorithme de tri");
    Put_Line("Compatible avec les sytemes UNIX uniquement");
-   Put_Line("Gasc Mayeul - 2019 - N'hésitez pas à reporter les bugs ;)");
    New_Line;
    Put_Line("Le nombre d'itération peut être donné en argument");
    
