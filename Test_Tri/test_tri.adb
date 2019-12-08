@@ -107,6 +107,29 @@ procedure Test_Tri is
    end Tri_Selection;
    
    
+   -- Tri selection - Version inversée
+   procedure Tri_Selection_Inv (Tab : in out Nbr) is
+      VMax : Integer := 0;
+      Max : Integer := 0;
+      Buffer : Integer;
+   begin
+      for J in Tab'Range loop
+	 Vmax := 0;
+	 for I in ((Tab'First+J-1))..Tab'last loop
+	    if VMax < Tab(I) then
+	       VMax := Tab(I);
+	       Max := I;
+	    end if;
+	 end loop;
+	 Buffer := Tab(Tab'First+J-1);
+	 Tab(Tab'First+J-1) := Tab(Max);
+	 Tab(Max) := Buffer;
+	 Aff(Tab);
+	 delay TMP;
+      end loop;
+   end Tri_Selection_Inv;
+   
+   
    -- Test de la procédure tri
    procedure Test_Tri (F : P_Procedure) is
       test_tri1 : nbr(1..150);
@@ -122,32 +145,39 @@ procedure Test_Tri is
    
    F1 : P_Procedure;
    F2 : P_Procedure;
-   Iteration : Integer := 0;
+   Iteration : Integer := 1;
+   Go : Boolean := False;
 begin
    --Renitialisation du générateur
    Reset(Hasard);
-   
-   -- Présentation de l'algorithme
-   Put_Line("Algorithme d'affichage d'algorithme de tri");
-   Put_Line("Compatible avec les sytemes UNIX uniquement");
-   New_Line;
-   Put_Line("Le nombre d'itération peut être donné en argument");
-   
-   delay 4.0;
-   
-   if Argument_Count = 1 then 
-      Iteration := Integer'Value(Argument(1));
+   if Argument_Count = 1 then
+      if Argument(1) = "--help" then
+	 Put_Line("Algorithme d'affichage d'algorithme de tri");
+	 Put_Line("Compatible avec les sytemes UNIX uniquement");
+	 New_Line;
+	 Put_Line("Le nombre d'itération peut être donné en argument");
+	 Put_Line("Argument -r pour un tri inverse");
+      elsif Argument(1) = "-r" then
+	 F1 := Tri_Selection_Inv'Access;
+	 Test_Tri(F1);
+      else
+	 Iteration := Integer'Value(Argument(1));
+	 Go := True;
+      end if;
    else
       New_Line;
-      Put("Nbr de boucles : ");
-      Ada.Integer_Text_IO.Get(Iteration);
+      --Put("Nbr de boucles : ");
+      --Ada.Integer_Text_IO.Get(Iteration);
+      Go := True;
    end if;
    
-   for I in 1..Iteration loop
-      --Test des fonctions
-      F1 := Tri_Bulle'Access;
-      F2 := Tri_Selection'Access;
-      Test_Tri(F1); 
-      Test_Tri(F2);
-   end loop;
+   if Go then
+      for I in 1..Iteration loop
+	 --Test des fonctions
+	 F1 := Tri_Bulle'Access;
+	 F2 := Tri_Selection'Access;
+	 Test_Tri(F1); 
+	 Test_Tri(F2);
+      end loop;
+   end if;
 end Test_Tri;

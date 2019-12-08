@@ -1,3 +1,13 @@
 # Essais Ada
 Partage de mes essais en Ada dans le cadre des cours de 2ème année MIC à l'INSA Toulouse et du [cours d'openclassroom](https://openclassrooms.com/fr/courses/900279-apprenez-a-programmer-avec-ada).
 Le code est sous licence GNU GPL 3, les cours de l'INSA et d'openclassroom appartiennent à leurs propriétaires respectifs.
+
+## Travaux sur les nombres premiers tronquables
+Je partage également quelques essais sur la recherche des [nombres premiers tronquables](https://fr.wikipedia.org/wiki/Nombre_premier_tronquable). Ada ayant été implémenté à une époque où le 64 bits n'était pas courant, je ne suis pas parvenu à calculer ces nombres lorsqu'ils font plus de 18 digits. Si vous avez une idée pour améliorer mon programme, contactez-moi.
+
+## Travaux sur les algorithmes de tri
+Dans le cadre d'un TD, j'ai réalisé quelques algorithmes simple pour trier des tableaux. J'ai également implémenté de quoi rendre plus visuels les tests d'algorithmes. 
+Vous pouvez passer le nombre d'itérations en argument. Option '--help' pour plus d'information, '-r' pour un tri inversé.
+
+## Contact
+manah@gmx.com
