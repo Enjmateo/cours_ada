@@ -17,7 +17,7 @@ procedure Nb_Premiers is
       if N mod Long_Integer(2) = 0 then
 	 Prime := False;
       else
-	 for I in 2..(Long_Integer(Sqrt(Float(N)))/2) loop
+	 for I in 2..(Long_Integer(1.0+Sqrt(Float(N)))/2) loop
 	    if N mod Long_Integer(2*I-1) = 0 then 
 	       Prime := False;
 	       exit;
@@ -65,7 +65,7 @@ procedure Nb_Premiers is
       if Is_Prime(N) then
 	 Aff_Troncable(N);
 	 if N < (Long_Integer'Last / 100) then
-	    for I in 1..10 loop
+	    for I in 1..9 loop
 	       N3 := 10;
 	       for J in 1..(Mode(N) - 2) loop
 		  N3 := N3 * 10;
@@ -86,7 +86,6 @@ procedure Nb_Premiers is
    
    
 begin
-   Troncable(Long_Integer(1));
    Troncable(Long_Integer(3));
    Troncable(Long_Integer(5));
    Troncable(Long_Integer(7));
