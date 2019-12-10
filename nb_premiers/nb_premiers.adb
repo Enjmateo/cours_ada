@@ -14,7 +14,7 @@ procedure Nb_Premiers is
    function Is_Prime(N : Long_Integer) return Boolean is
       Prime : Boolean := True;
    begin
-      if N mod Long_Integer(2) = 0 then
+      if N mod Long_Integer(2) = 0 and N /= 2 then
 	 Prime := False;
       else
 	 for I in 2..(Long_Integer(1.0+Sqrt(Float(N)))/2) loop
@@ -86,6 +86,7 @@ procedure Nb_Premiers is
    
    
 begin
+   Troncable(Long_Integer(2));
    Troncable(Long_Integer(3));
    Troncable(Long_Integer(5));
    Troncable(Long_Integer(7));
