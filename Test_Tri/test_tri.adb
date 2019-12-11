@@ -33,7 +33,7 @@ procedure Test_Tri is
    
    -- Procédure d'affichage d'un tableau de manière graphique
    procedure Aff (Tab : in  Nbr) is
-      Hauteur : constant Integer := 50;
+      Hauteur : constant Integer := 30;
       Value : Integer := 0;
       G : Grille(Tab'First..Hauteur, Tab'range) := (others => (others => ' '));
       Max : Integer := 0;
@@ -132,7 +132,7 @@ procedure Test_Tri is
    
    -- Test de la procédure tri
    procedure Test_Tri (F : P_Procedure) is
-      test_tri1 : nbr(1..150);
+      test_tri1 : nbr(1..70);
    begin
       Put_Line("------------------");
       for J in Test_Tri1'Range loop
