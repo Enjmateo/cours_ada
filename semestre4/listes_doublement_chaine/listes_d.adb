@@ -80,7 +80,9 @@ procedure Listes_d is
       P, Prec : P_Cell := null;
       Find :  Boolean;
    begin
-      if L.First.Value = E then
+      if L.First = null then
+	 raise Element_Inexistant;
+      elsif L.First.Value = E then
 	 Del_Beg(L);
       elsif L.Last.Value = E then
 	 Del_End(L);
@@ -126,4 +128,7 @@ begin
    Del_Elem(L, 9);
    Aff(L);
    Del_Elem(L, 28);
+   
+   L := (null, null);
+   Del_Elem(L, 1);
 end Listes_d;
