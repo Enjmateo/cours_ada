@@ -5,7 +5,10 @@ package Rationnels is
    function Constructeur(A, B : in Integer) return Rationnel;
    function Numerateur(A : in Rationnel) return Integer;
    function Denominateur(A : in Rationnel) return Integer;
+   function Inverse(A : in Rationnel) return Rationnel;
    function "="(A, B : in Rationnel) return Boolean;
+   function "<="(A, B : in Rationnel) return Boolean;
+   function ">="(A, B : in Rationnel) return Boolean;
    function "+"(A, B : in Rationnel) return Rationnel;
    function "-"(A, B : in Rationnel) return Rationnel;
    function "*"(A, B : in Rationnel) return Rationnel;

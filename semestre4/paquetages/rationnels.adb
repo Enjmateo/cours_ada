@@ -32,10 +32,25 @@ package body Rationnels is
    end Denominateur;
    
    --Opérations arithmétiques
+   function Inverse(A : in Rationnel) return Rationnel is
+   begin
+      return (A.Den, A.Num);
+   end Inverse;
+   
    function "="(A, B : in Rationnel) return Boolean is
    begin
       return A.Num = B.Num and A.Den = B.Den;
    end "=";
+   
+   function "<="(A, B : in Rationnel) return Boolean is
+   begin
+      return ((Float(A.Num)/Float(A.Den)) <= (Float(B.Num)/Float(B.Den)));
+   end "<=";
+   
+   function ">="(A, B : in Rationnel) return Boolean is
+   begin
+      return B <= A;
+   end ">=";
    
    function "+"(A, B : in Rationnel) return Rationnel is
    begin
