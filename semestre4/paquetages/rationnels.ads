@@ -2,7 +2,7 @@ package Rationnels is
    
    type Rationnel is private;
    
-   function Constructeur(A, B : in Integer) return Rationnel;
+   function Constructeur(D, B : in Integer) return Rationnel;
    function Numerateur(A : in Rationnel) return Integer;
    function Denominateur(A : in Rationnel) return Integer;
    function Inverse(A : in Rationnel) return Rationnel;

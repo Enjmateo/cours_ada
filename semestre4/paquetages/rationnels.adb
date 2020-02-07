@@ -4,21 +4,28 @@ with Outils; use Outils;
 package body Rationnels is
    
    function Simplify(A : Rationnel) return Rationnel is
-      D : Integer := Pgcd(A.Num, A.Den);
+      D : Integer := Pgcd(abs(A.Num), A.Den);
    begin
       return (A.Num / D, A.Den / D);
    end Simplify;
    
-   function Constructeur(A, B : in Integer) return Rationnel is
-      C : Rationnel := (A,B);
+   function Constructeur(D, B : in Integer) return Rationnel is
+      C : Rationnel := (D,B);
+      A : Integer := D;
    begin
+      if B < 0 then
+	 A := (-1)*A;
+      end if;
+      
       if B = 0 then
 	 C := (1,1);
 	 raise Denominateur_Nul;
       end if;
+      C := (A,B);
       return Simplify(C);
    exception
       when Denominateur_Nul => Put_Line("Tentative de division par zero !"); raise PROGRAM_ERROR;
+      
    end Constructeur;
    
    function Numerateur(A : in Rationnel) return Integer is
@@ -44,7 +51,7 @@ package body Rationnels is
    
    function "<="(A, B : in Rationnel) return Boolean is
    begin
-      return ((Float(A.Num)/Float(A.Den)) <= (Float(B.Num)/Float(B.Den)));
+      return Numerateur(A - B) < 0;
    end "<=";
    
    function ">="(A, B : in Rationnel) return Boolean is
