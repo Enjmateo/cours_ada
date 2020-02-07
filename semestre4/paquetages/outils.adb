@@ -12,7 +12,7 @@ package body Outils is
    
    function Ppcm(A, B : in Positive) return Positive is 
    begin
-      return 1;
+      return (A * B)/Pgcd(A,B);
    end Ppcm;
    
 begin

@@ -12,7 +12,13 @@ package body Rationnels is
    function Constructeur(A, B : in Integer) return Rationnel is
       C : Rationnel := (A,B);
    begin
+      if B = 0 then
+	 C := (1,1);
+	 raise Denominateur_Nul;
+      end if;
       return Simplify(C);
+   exception
+      when Denominateur_Nul => Put_Line("Tentative de division par zero !"); raise PROGRAM_ERROR;
    end Constructeur;
    
    function Numerateur(A : in Rationnel) return Integer is

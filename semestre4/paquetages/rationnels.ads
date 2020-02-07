@@ -12,6 +12,8 @@ package Rationnels is
    function "/"(A, B : in Rationnel) return Rationnel;
    function To_String(A : in Rationnel) return String;
    
+   Denominateur_Nul : exception;
+   
 private
    type Rationnel is record
       Num : Integer;
