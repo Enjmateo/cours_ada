@@ -1,4 +1,5 @@
 with Ada.Text_Io; use Ada.Text_Io;
+with Ada.Unchecked_Deallocation;
 
 package body Listes is
    
@@ -9,6 +10,9 @@ package body Listes is
       Info : Integer;
       Suiv : Liste;
    end record;
+
+   --Free
+   procedure Free is new Ada.Unchecked_Deallocation(Integer, Liste) ; 
    
    function Est_Vide(L : in Liste) return Boolean is
    begin
@@ -47,17 +51,27 @@ package body Listes is
    end Inserer;
    
    procedure Supprimer(E : Integer; L : in out Liste) is
+      buffer : Liste;
    begin
       if Appartient(E, L) then
 	 if L.all.Info = E then
-	    L := L.all.Suiv;
+	    buffer := L;
+	    free(L);
+	    L := buffer.all.Suiv;
+	    free(buffer);	
 	 else
 	    if L.all.Suiv.all.Info = E then
-	       L.all.Suiv := L.all.Suiv.all.Suiv;
+	       buffer := L.all.suiv;
+	       free(L.all.suiv);
+	       L.all.Suiv := buffer.all.Suiv;
+	       free(buffer);
 	    else
 	       Supprimer(E, L.all.Suiv);
 	    end if;
 	 end if;
+      end if;
+   end Supprimer;
+   
    procedure Afficher(L : in Liste);
    
 begin
