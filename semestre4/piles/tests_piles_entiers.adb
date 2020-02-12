@@ -1,4 +1,4 @@
--- Auteurs : P. Esquirol
+-- Auteurs : P. E.
 -- Version du 30/01/2019
 
 with Ada.Text_Io, Piles_Entiers, Afficher_Test;
@@ -39,9 +39,10 @@ begin
    begin
       New_Line;
       Put_Line("Test 3 : Empiler 10 entiers ");
-      --
-      --   ...  <<< A COMPLETER
-      --
+      for I in 2..12 loop
+	 Empiler(I, P);
+      end loop;
+      Put_Line(To_String(P));
    end;
 
 	--------------------------------
@@ -52,27 +53,33 @@ begin
       Nb : Integer;
    begin
       -- Empiler 10 elements
-      --
-      --   ...  <<< A COMPLETER
-      --
+      Init(P);
+      for I in 1..10 loop
+	 Empiler(I, P);
+      end loop;
       New_Line;
       Put_Line("Test 4: Affichage du sommet et depilement pendant 10 fois ...");
 
       -- Verifier que la pile est bien vide apres 10 appels a Depiler
-      --
-      --   ...  <<< A COMPLETER
-      --
+      for J in 1..10 loop
+	 Depiler(P);
+      end loop;
+      if Est_Vide(P) then
+	 Put_Line("La pile est vide");
+      else
+	 Put_Line("TEST 4 FAUTIF");
+	 --raise PROGRAM_ERROR;
+      end if;
       New_Line;
       Put_Line("Test 5: Tentative de depilement d'une pile vide ...");
-      --
-      --   ...  <<< A COMPLETER
-      --
+      Init(P);
+      Depiler(P);
       end;
 
 	-----------------------------------
 	-- 4. Test sur l'egalite de 2 piles
 	-----------------------------------
-	Put_Line("Test 6 : Initialisation de 2 piles P1 et P2, et comparaison, ajout de 10 elements et comparaison");
+   Put_Line("Test 6 : Initialisation de 2 piles P1 et P2, et comparaison, ajout de 10 elements et comparaison");
    declare
       P1, P2 : Pile;
    begin
@@ -81,18 +88,20 @@ begin
       -- Verifier qu'elles sont identiques (P1=P2)
       New_Line;
       Put_Line("Test 6 : Deux piles vides sont-elles identiques ?");
-      --
-      --   ...  <<< A COMPLETER
-      --
+      if P1 = P2 then
+	 Put_Line("Elles sont identiques");
+      end if;
       New_Line;
       Put_line("On empile desormais 10 entiers 1..10 sur les 2 piles");
-      --
-      --   ...  <<< A COMPLETER
-      --
+      for I in 2..11 loop
+	 Empiler(I, P1);
+	 Empiler(I, P2);
+	 Put_Line("On empile sur P1 et P2 : " & Integer'Image(I));
+      end loop;
       New_Line;
       Put_Line("Test 7 : Deux piles contenant 1..10 sont-elles identiques ?");
-      --
-      --   ...  <<< A COMPLETER
-      --
+      if P1 = P2 then
+	 Put_Line("Identiques");
+      end if;
    end;
 end Tests_Piles_Entiers;
