@@ -12,7 +12,9 @@ Le code est sous licence GNU GPL 3, les cours de l'INSA et d'openclassroom appar
 	* semestre4/listes_ordonnees
 
 * TP1 : Piles et expressions postfixées
-	* semestre4/piles
+	* semestre4/TP1_piles
+* TP2 : Paquetage de listes ordonnées d'entiers, type privé & limité privé
+	* semestre4/TP2_listes_ordonnees_type_LP
 
 ## Travaux sur les nombres premiers tronquables
 Je partage également quelques essais sur la recherche des [nombres premiers tronquables](https://fr.wikipedia.org/wiki/Nombre_premier_tronquable). Ada ayant été implémenté à une époque où le 64 bits n'était pas courant, je ne suis pas parvenu à calculer ces nombres lorsqu'ils font plus de 18 digits. Ainsi, sur les 4260 nombres de ce type qui existent, mon programme en trouve 4235, le plus grand étant `6484957213536676883`. Si vous avez une idée pour améliorer mon programme, contactez-moi.
