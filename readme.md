@@ -10,6 +10,8 @@ Le code est sous licence GNU GPL 3, les cours de l'INSA et d'openclassroom appar
 	* semestre4/paquetages
 * TD3 : Généricité :
 	* semestre4/listes_ordonnees
+* TD4 : Arbres binaires
+	* semestre4/arbres_binaires
 
 * TP1 : Piles et expressions postfixées
 	* semestre4/TP1_piles

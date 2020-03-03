@@ -17,9 +17,9 @@ package Listes_Ordonnees_Entiers is
    function Liste_To_String(L: in Une_Liste_Ordonnee_Entiers) return String;
 
    --ajouts de ss-programmes d'egalite et de copie
-   --function "="(L1, L2 : in Une_Liste_Ordonnee_Entiers) return Boolean;
+   function "="(L1, L2 : in Une_Liste_Ordonnee_Entiers) return Boolean;
 
-   --procedure Copie(L1 : in Une_Liste_Ordonnee_Entiers; L2 : out Une_Liste_Ordonnee_Entiers);
+   procedure Copie(L1 : in Une_Liste_Ordonnee_Entiers; L2 : out Une_Liste_Ordonnee_Entiers);
 
 
 private

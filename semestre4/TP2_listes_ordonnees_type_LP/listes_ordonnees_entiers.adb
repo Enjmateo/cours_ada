@@ -61,12 +61,14 @@ package body Listes_Ordonnees_Entiers is
 
    -------------------------------------------------------------------------
    -- Insertion ORDONNEE et SANS DOUBLON
-
+   
    procedure Inserer_Lien(E: in Integer; L: in out Lien) is
    begin
-      if L.Info = E then raise Element_Deja_Present;
-      elsif L.Info < E then
-	 L.Suiv := new Cellule'(E, L.suiv);
+      if L = null then
+	 L := new Cellule'(E, null);
+      elsif L.Info = E then raise Element_Deja_Present;
+      elsif L.info > E then
+	 L := new Cellule'(E, L);
       else
 	 Inserer_Lien(E, L.Suiv);
       end if;
@@ -82,6 +84,7 @@ package body Listes_Ordonnees_Entiers is
    procedure Inserer(E: in integer; L: in out Une_Liste_Ordonnee_Entiers) is
    begin
       Inserer_Lien(E, L.Debut);
+      L.Taille := L.Taille + 1;
    end Inserer;
    -------------------------------------------------------------------------
 
@@ -111,5 +114,28 @@ package body Listes_Ordonnees_Entiers is
       L.Taille := L.Taille - 1;
    end Supprimer;
    -------------------------------------------------------------------------
-
+   
+   -------------------------------------------------------------------------
+   -- Fonctions facultatives
+   function Egal_Lien(L1, L2 : in Lien) return Boolean is
+   begin
+      if L1 = null and L2 = null then
+	 return True;
+      elsif (L1 = null or L2 = null) or (L1.Info /= L2.Info) then
+	 return False;
+      elsif L1.Info = L2.Info then
+	 return Egal_Lien(L1.all.Suiv, L2.all.Suiv);
+      end if;
+   end Egal_Lien;
+   
+   function "="(L1, L2 : in Une_Liste_Ordonnee_Entiers) return Boolean is
+   begin
+      return Egal_Lien(L1.Debut, L2.Debut);
+   end "=";
+   
+   procedure Copie(L1 : in Une_Liste_Ordonnee_Entiers; L2 : out Une_Liste_Ordonnee_Entiers) is
+   begin
+      null;
+   end Copie;
+   
 end Listes_Ordonnees_Entiers;
