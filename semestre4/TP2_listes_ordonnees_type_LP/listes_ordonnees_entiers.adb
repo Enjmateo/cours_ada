@@ -125,6 +125,8 @@ package body Listes_Ordonnees_Entiers is
 	 return False;
       elsif L1.Info = L2.Info then
 	 return Egal_Lien(L1.all.Suiv, L2.all.Suiv);
+      else
+	 return FALSE; -- Ligne de code jamais atteinte, mais supprime des messages d'erreurs à la compilation.
       end if;
    end Egal_Lien;
    
