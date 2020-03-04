@@ -15,8 +15,10 @@ Le code est sous licence GNU GPL 3, les cours de l'INSA et d'openclassroom appar
 
 * TP1 : Piles et expressions postfixées
 	* semestre4/TP1_piles
-* TP2 : Paquetage de listes ordonnées d'entiers, type privé & limité privé
+* TP2 : Paquetages de listes ordonnées d'entiers, type privé & limité privé
 	* semestre4/TP2_listes_ordonnees_type_LP
+* TP3 : Paquetages génériques
+	* semestre4/TP3_paquetages_generiques
 
 ## Travaux divers
 Partage de quelques travaux personnels, voir [travaux.md](travaux.md). 
