@@ -16,7 +16,7 @@ begin
    Put_Line("-----------------------------------------------------------");
    Put_Line("Etape 2 - Affectation de L1 a L2");
 
-   L2 := L1;
+   Copie(L1, L2);
    Put_Line("Contenu de L2 : " & Liste_To_String(L2));
 
    Put_Line("-----------------------------------------------------------");

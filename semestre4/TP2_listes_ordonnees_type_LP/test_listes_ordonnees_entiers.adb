@@ -86,6 +86,25 @@ begin
    end;
    -----------------------------------------------------------
    
+   
+   -----------------------------------------------------------
+   -- Test des fonctions auxiliaires
+   -----------------------------------------------------------
+   declare
+       L, L2 : Une_Liste_Ordonnee_Entiers;
+   begin
+      Put_Line("On créé une liste L: ");
+      Inserer(1,L); Inserer(-1,L);Inserer(3,L);
+      Put_Line(Liste_To_String(L)); New_Line;
+      Put_Line("On en créé une copie L2: ");
+      Copie(L, L2);
+      Put_Line(Liste_To_String(L2)); New_Line;
+      
+      Put_Line("On vérifie qu'elles sont égales:");
+      Afficher_Test("=(L,L2) ?", "TRUE", Boolean'Image(L=L2));
+   end;
+   -----------------------------------------------------------
+   
    New_Line;
    Put_Line("Fin des tests.");
 end Test_Listes_Ordonnees_Entiers;
