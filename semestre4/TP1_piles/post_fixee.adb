@@ -9,13 +9,23 @@ procedure Post_Fixee is
    Manque_Operande : exception;
    Manque_Operateur : exception;
    
-   procedure Lire_Entree(E : in out String) is 
+   procedure Lire_Entree(E : in out String; T : in out Tab) is 
       Len : Integer := 0;
    begin
       Get_Line(E, len);
       for I in Len+1..E'Last loop
 	 E(I) := ' ';
       end loop;
+      
+      for J in 1..Len loop
+	 case E(J) is
+	    when 'A'..'Z' => 
+	       Put("Quelle est la valeur de " & Character'Image(E(J)) & " ?");
+	       T(E(J)) := Integer'Value(Get_line);
+	    when others => null;
+	 end case;
+      end loop;
+      
    end Lire_Entree;
    
    procedure Chk(P : in out Pile) is
@@ -106,7 +116,7 @@ procedure Post_Fixee is
       end loop;
       
       Put_Line("Saisir l'expression : ");
-      Lire_Entree(E);
+      Lire_Entree(E, T);
       
       Put_Line(Integer'Image(Eval_Exp_PostFixee(E, T)));
       
