@@ -48,14 +48,14 @@ package body Listes_Ordonnees_g is
    function Lien_To_String(LL : in Lien) return String is
    begin
       if LL = null then return "";
-                   else return Element'image(LL.all.info) & Lien_To_String(LL.all.suiv);
+                   else return Image(LL.all.info) & Lien_To_String(LL.all.suiv);
       end if;
    end Lien_To_String;
 
    -- sur le type Une_Liste_Ordonnee_Entiers
    function Liste_To_String(L: in Une_Liste_Ordonnee_Entiers) return String is
    begin
-      return Element'Image(L.Taille) & " elements : (" & Lien_To_String(L.Debut) & " )";
+      return Integer'Image(L.Taille) & " elements : (" & Lien_To_String(L.Debut) & " )";
    end Liste_To_String;
    -------------------------------------------------------------------------
 

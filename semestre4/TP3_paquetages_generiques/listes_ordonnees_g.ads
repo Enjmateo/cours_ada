@@ -1,8 +1,8 @@
 generic
-   type Element(<>) is private;
+   type Element is private;
    with function "<"(E1, E2: in Element) return Boolean;
    with function ">"(E1, E2: in Element) return Boolean;
-with function Image (E : Element) return String;
+   with function Image(E1 : in Element) return String;
 
 package Listes_Ordonnees_g is
    
