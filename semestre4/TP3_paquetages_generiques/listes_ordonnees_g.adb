@@ -3,14 +3,14 @@ with Ada.Unchecked_Deallocation;
 package body Listes_Ordonnees_g is
 
    -------------------------------------------------------------------------
-   function Est_Vide(L : in Une_Liste_Ordonnee_Entiers) return Boolean is
+   function Est_Vide(L : in Une_Liste_Ordonnee) return Boolean is
    begin
       return L.Debut = null;
    end Est_Vide;
    -------------------------------------------------------------------------
 
    -------------------------------------------------------------------------
-   function Cardinal(L : in Une_Liste_Ordonnee_Entiers) return Integer is
+   function Cardinal(L : in Une_Liste_Ordonnee) return Integer is
    begin
       return L.Taille;
    end Cardinal;
@@ -34,7 +34,7 @@ package body Listes_Ordonnees_g is
 
    -- Appartient sur le type Une_Liste_Ordonnee_Entiers
    -- On reutilise la fonction classique Appartient_Lien sur L.debut
-   function Appartient(E : in Element; L : in Une_Liste_Ordonnee_Entiers) return Boolean is
+   function Appartient(E : in Element; L : in Une_Liste_Ordonnee) return Boolean is
    begin
       return Appartient_Lien(E, L.Debut);
    end Appartient;
@@ -53,7 +53,7 @@ package body Listes_Ordonnees_g is
    end Lien_To_String;
 
    -- sur le type Une_Liste_Ordonnee_Entiers
-   function Liste_To_String(L: in Une_Liste_Ordonnee_Entiers) return String is
+   function Liste_To_String(L: in Une_Liste_Ordonnee) return String is
    begin
       return Integer'Image(L.Taille) & " elements : (" & Lien_To_String(L.Debut) & " )";
    end Liste_To_String;
@@ -67,7 +67,7 @@ package body Listes_Ordonnees_g is
       if L = null then
 	 L := new Cellule'(E, null);
       elsif L.Info = E then raise Element_Deja_Present;
-      elsif L.info > E then
+      elsif E < L.info then
 	 L := new Cellule'(E, L);
       else
 	 Inserer_Lien(E, L.Suiv);
@@ -81,7 +81,7 @@ package body Listes_Ordonnees_g is
 
 
    -------------------------------------------------------------------------
-   procedure Inserer(E: in Element; L: in out Une_Liste_Ordonnee_Entiers) is
+   procedure Inserer(E: in Element; L: in out Une_Liste_Ordonnee) is
    begin
       Inserer_Lien(E, L.Debut);
       L.Taille := L.Taille + 1;
@@ -102,13 +102,14 @@ package body Listes_Ordonnees_g is
       elsif E = L.All.Info then
          Recup := L;           -- on repere la cellule a recycler
          L     := L.All.Suiv;  -- on modifie le debut de la liste
+	 Free_Element(Recup.all.Info);
          Free(Recup);          -- on recupere la memoire
       else
          Supprimer_Lien(E, L.all.suiv);
       end if;
    end Supprimer_Lien;
    -------------------------------------------------------------------------
-   procedure Supprimer(E: in Element; L: in out Une_Liste_Ordonnee_Entiers) is
+   procedure Supprimer(E: in Element; L: in out Une_Liste_Ordonnee) is
    begin
       Supprimer_Lien(E, L.debut);
       L.Taille := L.Taille - 1;
@@ -130,12 +131,12 @@ package body Listes_Ordonnees_g is
       end if;
    end Egal_Lien;
    
-   function "="(L1, L2 : in Une_Liste_Ordonnee_Entiers) return Boolean is
+   function "="(L1, L2 : in Une_Liste_Ordonnee) return Boolean is
    begin
       return Egal_Lien(L1.Debut, L2.Debut);
    end "=";
    
-   procedure Copie_Lien(L1: in Lien; L2 : out Lien) is
+   procedure Copie_Lien_obsolete(L1: in Lien; L2 : out Lien) is
       P1 : Lien := L1;
       P2 : Lien := null;
    begin
@@ -150,11 +151,18 @@ package body Listes_Ordonnees_g is
 	    P1 := P1.all.Suiv;
 	 end loop;
       end if;
+   end Copie_Lien_Obsolete;
+   
+   function Copie_Lien(L1: in Lien) return Lien is
+   begin
+      if L1 = null then return null;
+      else return new Cellule'(L1.all.Info, Copie_Lien(L1.all.Suiv)); 
+      end if; 
    end Copie_Lien;
    
-   procedure Copie(L1 : in Une_Liste_Ordonnee_Entiers; L2 : out Une_Liste_Ordonnee_Entiers) is
+   procedure Copie(L1 : in Une_Liste_Ordonnee; L2 : out Une_Liste_Ordonnee) is
    begin
-      Copie_lien(L1.Debut, L2.Debut);
+      L2.Debut := Copie_lien(L1.Debut);
       L2.Taille := L1.Taille;
    end Copie;
    
