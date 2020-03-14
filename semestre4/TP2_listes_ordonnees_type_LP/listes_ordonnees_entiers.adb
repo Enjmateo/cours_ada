@@ -135,26 +135,16 @@ package body Listes_Ordonnees_Entiers is
       return Egal_Lien(L1.Debut, L2.Debut);
    end "=";
    
-   procedure Copie_Lien(L1: in Lien; L2 : out Lien) is
-      P1 : Lien := L1;
-      P2 : Lien := null;
+   function Copie_Lien(L1: in Lien) return Lien is
    begin
-      L2 := P2;
-      if L1 /= null then
-	 P2 := new Cellule'(P1.all.Info, null);
-	 L2 := P2;
-	 P1 := P1.all.Suiv;
-	 while P1 /= null loop
-	    P2.all.Suiv := new Cellule'(P1.all.Info, null);
-	    P2 := P2.all.Suiv;
-	    P1 := P1.all.Suiv;
-	 end loop;
-      end if;
+      if L1 = null then return null;
+      else return new Cellule'(L1.all.Info, Copie_Lien(L1.all.Suiv)); 
+      end if; 
    end Copie_Lien;
    
    procedure Copie(L1 : in Une_Liste_Ordonnee_Entiers; L2 : out Une_Liste_Ordonnee_Entiers) is
    begin
-      Copie_lien(L1.Debut, L2.Debut);
+      L2.Debut := Copie_lien(L1.Debut);
       L2.Taille := L1.Taille;
    end Copie;
    
