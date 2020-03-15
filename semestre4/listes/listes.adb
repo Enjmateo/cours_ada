@@ -44,25 +44,32 @@ procedure listes is
       end if;
    end Test_Identiques;
    
+   
+   function Appartient(E: in Integer; L: in List) return Boolean is P: List := L; begin
+      if P = null then return False;
+      elsif P.Value = E then return True;
+      else return Appartient(E, P.all.Next);
+      end if;
+   end Appartient;
+      
    procedure Filtrage(L: in List) is
-      P, P2, Prec : List := L;
+      P, Prec : List := L;
+      B : List := null;
    begin
+      if P /= null then         --Si la liste n'est pas vide, on crée P et Prec t/q Prec prècède P
+	 B := new Cell'(P.Value, null); --On stocke les valeurs déjà rencontrées dans une liste
+	 P := P.Next; 
+      end if;
+      
       while P /= null loop
-	 P2 := L;
-	 while P2 /= P and P2 /= null loop
-	    if P2.all.Value = P.all.Value then
-	       if P.all.Next /= null then
-		  P := Prec;
-		  Prec.all.Next := P.all.Next.all.Next;
-	       else
-		  P := Prec;
-		  Prec.all.Next := null;
-	       end if;
-	    end if;
-	    P2 := P2.all.Next;
-	 end loop;
-	 Prec := P;
-	 P := P.all.Next;
+	 if Appartient(P.Value, B) then --Si on a déjà rencontré la valeur
+	    Prec.Next := P.Next;        --On supprime la cellule
+	    P := P.Next;
+	 else                           --Sinon
+	    B := new Cell'(P.Value, B); --On ajoute la valeur comme connue
+	    P := P.Next;                --On passe au suivant
+	    Prec := Prec.Next;
+	 end if;
       end loop;
    end Filtrage;
    
@@ -72,7 +79,14 @@ procedure listes is
    L2 : List := new Cell'(1, new Cell'(2, new Cell'(3, new Cell'(2, null))));
    L3 : List := new Cell'(1, new Cell'(2, new Cell'(3, new Cell'(2, null))));
    L4 : List := new Cell'(1, new Cell'(2, new Cell'(3, new Cell'(4, new Cell'(1, new Cell'(2, new Cell'(3, new Cell'(4, null))))))));
+   L5 : List := new Cell'(1, new Cell'(1, new Cell'(1, new Cell'(2, new Cell'(1, new Cell'(3, new Cell'(3, null)))))));
+   
 begin
+   -- Test appartient
+   if Appartient(2, L5) then Put_Line("Test 1 ok"); end if;
+   if Appartient(1, L5) then Put_Line("Test 2 ok"); end if;
+   if Appartient(8, L5) then Put_Line("Test 3 failed"); end if;
+   
    --EXO 1
    Test_Identiques(L0, L1); --Identiques
    Test_Identiques(L2, L3); --Identiques
@@ -87,6 +101,12 @@ begin
    Aff(L4);
    Filtrage(L4);
    Aff(L4);
+   
+   -- Test autre
+   New_Line;
+   Aff(L5);
+   Filtrage(L5);
+   Aff(L5);
    
 end listes;
 
