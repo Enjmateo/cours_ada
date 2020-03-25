@@ -13,7 +13,7 @@ procedure Tester_Liste_Contacts is
 begin
    
    -----------------------------------------------------------
-   -- Utilisation d'annuaire
+   -- Utilisation d'annuaires
    -----------------------------------------------------------
    
    -- Entourloupe pour avoir un nom de fichier contraint, saisi par l'utilisateur et de bonne taille
@@ -24,7 +24,9 @@ begin
    begin
       open(Fichier, in_File, Nom_Fichier);
       
-      -- WORKS IN PROGRESS
+      
+      -- WORK IN PROGRESS
+      
    
    -----------------------------------------------------------
    -- Test de création
