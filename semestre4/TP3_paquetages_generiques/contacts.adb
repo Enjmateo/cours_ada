@@ -53,5 +53,20 @@ package body Contacts is
       Liberer_String(C.Specialite);
       Liberer_String(C.Telephone);
    end Liberer_Contact;
+   
+   function Slct_Spec(C : in Un_Contact) return Boolean is
+   begin
+      return C.Specialite.all = Choix;
+   end Slct_Spec;
+
+   function Slct_Nom(C : in Un_Contact) return Boolean is
+   begin
+      return C.Nom.all = Choix;
+   end Slct_Nom;
+
+   function Slct_Ville(C : in Un_Contact) return Boolean is
+   begin
+      return C.Ville.all = Choix;
+   end Slct_Ville;
 
 end Contacts;

@@ -26,6 +26,10 @@ package Listes_Ordonnees_g is
    function "="(L1, L2 : in Une_Liste_Ordonnee) return Boolean;
 
    procedure Copie(L1 : in Une_Liste_Ordonnee; L2 : out Une_Liste_Ordonnee);
+   
+   generic
+      with function Critere(E: in Element) return Boolean;
+   procedure Filtrage(L: in out Une_Liste_Ordonnee);
 
 
 private

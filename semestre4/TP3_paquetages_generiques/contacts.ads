@@ -26,6 +26,17 @@ package Contacts is
 
    --recuperation memoire
    procedure Liberer_Contact(C : in out Un_Contact);
+   
+   -- Fonction qui saura "regarder" au bon endroit selon ce qu'on demande
+   generic
+      Choix : String;
+   function Slct_Spec(C : in Un_Contact) return Boolean;
+   generic
+      Choix : String;
+   function Slct_Nom(C: in Un_Contact) return Boolean;
+   generic
+      Choix : String;
+   function Slct_Ville(C: in Un_Contact) return Boolean;
 
 private
 

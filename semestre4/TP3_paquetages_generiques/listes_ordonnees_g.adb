@@ -48,7 +48,7 @@ package body Listes_Ordonnees_g is
    function Lien_To_String(LL : in Lien) return String is
    begin
       if LL = null then return "";
-                   else return Image(LL.all.info) & Lien_To_String(LL.all.suiv);
+                   else return Image(LL.all.info) & Lien_To_String(LL.all.suiv); 
       end if;
    end Lien_To_String;
 
@@ -165,5 +165,16 @@ package body Listes_Ordonnees_g is
       L2.Debut := Copie_lien(L1.Debut);
       L2.Taille := L1.Taille;
    end Copie;
+   
+   procedure Filtrage(L: in out Une_Liste_Ordonnee) is
+      P : Lien := L.Debut;
+   begin
+      while P /= null loop
+	 if not Critere(P.Info) then 
+	    Supprimer(P.Info, L);
+	 end if;
+	 P := P.all.Suiv;
+      end loop;
+   end Filtrage;
    
 end Listes_Ordonnees_g;
